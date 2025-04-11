@@ -90,8 +90,8 @@ def main():
         geoip_content += f"{ip},CN\n"  # 假设所有 IP 地址都位于中国，你需要根据实际情况修改
 
     # 保存文件
-    output_geosite_file = "data/geosite-bittorrent"  # 替换为你希望保存的文件路径
-    output_geoip_file = "data/geoip-bittorrent"
+    output_geosite_file = "geosite-bittorrent"  # 替换为你希望保存的文件路径
+    output_geoip_file = "geoip-bittorrent"
     try:
         with open(output_geosite_file, "w") as f:
             f.write(geosite_content)
