@@ -2,12 +2,14 @@ import requests
 import re
 from urllib.parse import urlparse
 import datetime
+import ipaddress  # 导入 ipaddress 模块
 
 def download_trackers(url):
     """下载 Tracker 列表并返回内容."""
     try:
         response = requests.get(url)
         response.raise_for_status()  # 检查是否有 HTTP 错误
+        print(f"下载 {url} 成功，状态码: {response.status_code}")
         return response.text.splitlines()
     except requests.exceptions.RequestException as e:
         print(f"下载 {url} 失败: {e}")
@@ -16,14 +18,18 @@ def download_trackers(url):
 def extract_domain_and_ip(tracker_url):
     """从 Tracker URL 中提取域名和 IP 地址."""
     try:
+        print(f"原始 Tracker URL: {tracker_url}")  # 打印原始 URL
         parsed_url = urlparse(tracker_url)
+        print(f"解析后的 URL: {parsed_url}")  # 打印解析后的 URL
         netloc = parsed_url.netloc
+        print(f"Netloc: {netloc}")  # 打印 netloc
         # 尝试解析为 IP 地址
         try:
-            import ipaddress
-            ipaddress.ip_address(netloc.split(':')[0]) # 仅判断是否为有效IP，不捕获带端口的
-            return None, netloc.split(':')[0]
+            ip_addr = ipaddress.ip_address(netloc.split(':')[0])  # 同时处理 IPv4 和 IPv6
+            print(f"IP 地址: {ip_addr}")  # 打印 IP 地址
+            return None, str(ip_addr)  # 返回字符串形式的 IP 地址
         except ValueError:
+            print(f"域名: {netloc}")  # 打印域名
             return netloc, None
     except Exception as e:
         print(f"解析 URL {tracker_url} 失败: {e}")
@@ -60,46 +66,36 @@ def main():
     all_trackers = []
     for url in tracker_list_urls:
         all_trackers.extend(download_trackers(url))
+    print(f"下载了 {len(all_trackers)} 个 Tracker URL")
 
     domains = set()
     ips = set()
     for tracker in all_trackers:
+        tracker = tracker.lower().strip()  # 转换为小写并去除空格
         domain, ip = extract_domain_and_ip(tracker)
         if domain:
             domains.add(domain)
         if ip:
             ips.add(ip)
+    print(f"去重前，有 {len(domains)} 个域名和 {len(ips)} 个 IP 地址")
 
     # 清洗域名，移除无效或非域名的条目 (可选，可以根据需要添加更多规则)
     valid_domains = {
-        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", domain)
+        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+$", domain)
     }
+    print(f"去重后，有 {len(valid_domains)} 个域名")
 
     # 生成文件内容
-    geosite_content = f"""# bt-site.dat
-# Last updated: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-"""
     geosite_txt_content = ""
     for domain in sorted(valid_domains):
-        geosite_content += domain + "\n"
-        geosite_txt_content += domain + "\n"
+        geosite_txt_content += f'\t\t    "{domain}",\n'
 
-    geoip_content = f"""# bt-ip.dat
-# Last updated: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-"""
     geoip_txt_content = ""
     for ip in sorted(ips):
-        geoip_content += f"{ip},CN\n"  # 假设所有 IP 地址都位于中国，你需要根据实际情况修改
-        geoip_txt_content += ip + "\n"
+        geoip_txt_content += f'\t\t    "{ip}",\n'
 
     # 保存文件
     try:
-        with open("bt-site.dat", "w") as f:
-            f.write(geosite_content)
-        print("成功生成 bt-site.dat")
-        with open("bt-ip.dat", "w") as f:
-            f.write(geoip_content)
-        print("成功生成 bt-ip.dat")
         with open("bt-site.txt", "w") as f:
             f.write(geosite_txt_content)
         print("成功生成 bt-site.txt")
