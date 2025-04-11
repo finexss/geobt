@@ -75,30 +75,37 @@ def main():
         domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", domain)
     }
 
-    # 生成 geosite 文件内容
-    geosite_content = f"""# geosite-bittorrent.dat
+    # 生成文件内容
+    geosite_content = f"""# bt-site.dat
 # Last updated: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 """
+    geosite_txt_content = ""
     for domain in sorted(valid_domains):
         geosite_content += domain + "\n"
+        geosite_txt_content += domain + "\n"
 
-    # 生成 geoip 文件内容
-    geoip_content = f"""# geoip-bittorrent.dat
+    geoip_content = f"""# bt-ip.dat
 # Last updated: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 """
+    geoip_txt_content = ""
     for ip in sorted(ips):
         geoip_content += f"{ip},CN\n"  # 假设所有 IP 地址都位于中国，你需要根据实际情况修改
+        geoip_txt_content += ip + "\n"
 
     # 保存文件
-    output_geosite_file = "geosite-bittorrent"  # 替换为你希望保存的文件路径
-    output_geoip_file = "geoip-bittorrent"
     try:
-        with open(output_geosite_file, "w") as f:
+        with open("bt-site.dat", "w") as f:
             f.write(geosite_content)
-        print(f"成功生成 {output_geosite_file}")
-        with open(output_geoip_file, "w") as f:
+        print("成功生成 bt-site.dat")
+        with open("bt-ip.dat", "w") as f:
             f.write(geoip_content)
-        print(f"成功生成 {output_geoip_file}")
+        print("成功生成 bt-ip.dat")
+        with open("bt-site.txt", "w") as f:
+            f.write(geosite_txt_content)
+        print("成功生成 bt-site.txt")
+        with open("bt-ip.txt", "w") as f:
+            f.write(geoip_txt_content)
+        print("成功生成 bt-ip.txt")
     except IOError as e:
         print(f"保存文件失败: {e}")
 
