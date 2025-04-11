@@ -3,7 +3,7 @@ import re
 from urllib.parse import urlparse
 import datetime
 import ipaddress
-import tldextract  # 导入 tldextract 模块
+import tldextract # 仍然导入，可用作验证
 import logging
 import sys
 
@@ -35,12 +35,12 @@ def download_and_split_trackers(url):
 
         # 同时按换行符和逗号分割，然后清理
         potential_entries = re.split(r'[,\n\s]+', content) # 使用正则分割多种分隔符包括空格
-        
+
         for entry in potential_entries:
             entry = entry.strip()
             if entry and not entry.startswith('#'): # 忽略空行和注释
                  # 检查是否是有效的URL格式（简单检查）
-                if '://' in entry or re.match(r'^[\w.-]+(\:\d+)?(/.*)?$', entry):
+                if '://' in entry or re.match(r'^[\w\[\]\.\-:]+(:\d+)?(/.*)?$', entry): # 调整正则匹配IPv6括号
                     tracker_entries.append(entry)
                 else:
                     logger.warning(f"忽略无效条目: {entry} (来自: {url})")
@@ -51,64 +51,65 @@ def download_and_split_trackers(url):
         logger.error(f"下载失败: {url} - {e}")
     except Exception as e:
         logger.error(f"处理下载内容时出错 ({url}): {e}")
-        
+
     logger.info(f"从 {url} 提取了 {len(tracker_entries)} 个有效条目")
     return tracker_entries
 
 def extract_domain_or_ip(tracker_entry):
-    """从单个 Tracker 条目中提取域名或 IP 地址。"""
+    """从单个 Tracker 条目中提取域名(不含端口) 或 IP 地址。"""
     domain = None
     ip = None
     original_entry = tracker_entry # 保留原始条目用于日志
 
     try:
-        # 移除协议头 (http, https, udp, wss)
+        # 1. 移除协议头 (http, https, udp, wss) - 可选，因为后面会处理 netloc
         if "://" in tracker_entry:
-            tracker_entry = tracker_entry.split("://", 1)[1]
+            tracker_entry_no_proto = tracker_entry.split("://", 1)[1]
+        else:
+            tracker_entry_no_proto = tracker_entry # 如果没有协议头，直接使用
 
-        # 分离 netloc (host:port 或 host) 和 path
-        netloc_part = tracker_entry.split("/", 1)[0]
+        # 2. 分离 netloc (host:port 或 host) 和 path
+        netloc_part = tracker_entry_no_proto.split("/", 1)[0]
 
-        # --- 核心解析逻辑 ---
-        host = netloc_part
-        is_ipv6 = False
+        # 3. 分离 host 和 port，并处理 IPv6
+        host_for_check = "" # 用于 ipaddress 检查的部分
+        hostname_candidate = "" # 存储提取出的完整主机名(无端口)
 
-        # 处理 IPv6 地址的方括号
-        if host.startswith("[") and "]" in host:
-            ipv6_match = re.match(r'\[([0-9a-fA-F:]+)\](?::(\d+))?', host)
+        if netloc_part.startswith("[") and "]" in netloc_part:
+            # 处理 IPv6 地址 [address]:port or [address]
+            ipv6_match = re.match(r'\[([0-9a-fA-F:]+)\](?::(\d+))?', netloc_part)
             if ipv6_match:
-                host = ipv6_match.group(1)
-                is_ipv6 = True
+                host_for_check = ipv6_match.group(1)
+                hostname_candidate = host_for_check # IPv6 地址本身也可以是候选主机名
             else:
                  logger.warning(f"无法解析括号内的 IPv6 地址: {netloc_part}")
                  return None, None # 格式错误，直接跳过
         else:
-             # 对于非括号IPv6或域名/IPv4，分离端口
-             host_parts = host.split(':', 1)
-             host = host_parts[0]
+             # 处理 IPv4 或 域名 host:port or host
+             host_parts = netloc_part.split(':', 1)
+             host_for_check = host_parts[0]
+             hostname_candidate = host_parts[0]
 
-        # 尝试解析为 IP 地址
+        # 4. 优先尝试解析为 IP 地址
         try:
-            ip_addr = ipaddress.ip_address(host)
+            ip_addr = ipaddress.ip_address(host_for_check)
             ip = str(ip_addr)
             logger.info(f"提取到 IP: {ip} (来自: {original_entry})")
+            domain = None # 确定是 IP，则域名置空
         except ValueError:
-            # 如果不是 IP 地址，尝试提取域名
-            try:
-                # 使用 tldextract 获取注册域名 (去除子域名和端口)
-                ext = tldextract.extract(host)
-                if ext.domain and ext.suffix: # 确保提取到了有效的域名和后缀
-                    domain = f"{ext.domain}.{ext.suffix}"
+            # 5. 如果不是 IP，则认为是域名
+            if hostname_candidate:
+                # 使用基本的正则表达式验证一下域名结构是否合理
+                # 这个正则比较宽松，主要排除明显不是域名的字符串
+                if re.match(r"^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$", hostname_candidate):
+                    domain = hostname_candidate # 使用提取出的完整主机名
                     logger.info(f"提取到域名: {domain} (来自: {original_entry})")
                 else:
-                    # 如果 tldextract 失败，但 host 看起来像域名，也保留（作为后备）
-                    if re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", host):
-                         domain = host
-                         logger.warning(f"tldextract 未能完全解析，但保留疑似域名: {domain} (来自: {original_entry})")
-                    else:
-                        logger.warning(f"无法识别为有效域名: {host} (来自: {original_entry})")
-            except Exception as e:
-                logger.error(f"域名提取 (tldextract) 出错 for '{host}': {e}")
+                    logger.warning(f"提取的主机名 '{hostname_candidate}' 不符合基本域名格式 (来自: {original_entry})")
+                    domain = None
+            else:
+                logger.warning(f"无法从 '{netloc_part}' 提取主机名 (来自: {original_entry})")
+                domain = None
 
     except Exception as e:
         logger.error(f"解析条目时发生未知错误 '{original_entry}': {e}")
@@ -154,7 +155,6 @@ def main():
         entries = download_and_split_trackers(url)
         if entries:
              all_tracker_entries.extend(entries)
-        
 
     logger.info(f"总共收集到 {len(all_tracker_entries)} 个潜在 Tracker 条目")
 
@@ -169,11 +169,8 @@ def main():
         if ip:
             unique_ips.add(ip)
         elif domain:
-             # 基本的域名有效性检查
-            if re.match(r"^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", domain):
-                unique_domains.add(domain)
-            else:
-                 logger.warning(f"忽略提取后无效的域名格式: {domain} (来自: {entry})")
+            # 这里不再需要额外的正则检查，因为 extract_domain_or_ip 内部已经做了基础验证
+            unique_domains.add(domain)
 
     logger.info(f"处理完成 {processed_count} 个条目")
     logger.info(f"提取并去重后得到 {len(unique_domains)} 个域名和 {len(unique_ips)} 个 IP 地址")
@@ -191,9 +188,6 @@ def main():
     try:
         with open("bt-site.txt", "w", encoding='utf-8') as f:
             f.write("\n".join(site_lines)) # 最后用换行连接所有行
-            # 可以选择在最后一行不加逗号
-            # if site_lines:
-            #     f.write("\n".join(site_lines[:-1]) + "\n" + site_lines[-1].rstrip(','))
         logger.info("成功生成 bt-site.txt")
     except IOError as e:
         logger.error(f"保存 bt-site.txt 文件失败: {e}")
@@ -201,10 +195,6 @@ def main():
     try:
         with open("bt-ip.txt", "w", encoding='utf-8') as f:
              f.write("\n".join(ip_lines)) # 最后用换行连接所有行
-             # 可以选择在最后一行不加逗号
-             # if ip_lines:
-             #    f.write("\n".join(ip_lines[:-1]) + "\n" + ip_lines[-1].rstrip(','))
-
         logger.info("成功生成 bt-ip.txt")
     except IOError as e:
         logger.error(f"保存 bt-ip.txt 文件失败: {e}")
