@@ -10,6 +10,7 @@ def download_trackers(url, log_file):
         response = requests.get(url)
         response.raise_for_status()  # 检查是否有 HTTP 错误
         log_file.write(f"{datetime.datetime.now()}：下载 {url} 成功，状态码: {response.status_code}\n")
+        print(f"下载 {url} 成功，状态码: {response.status_code}")
         content = response.text
         # 使用逗号分割内容
         trackers = content.split(',')
@@ -103,7 +104,8 @@ def main():
 
     start_time = datetime.datetime.now()
 
-    with open("log.txt", "w") as log_file:
+    try:
+        log_file = open("log.txt", "w")
         log_file.write(f"{datetime.datetime.now()}：程序开始运行\n")
 
         all_trackers = []
@@ -165,6 +167,12 @@ def main():
 
         print(f"程序运行结束，耗时: {duration}")
         print("详细信息请查看 log.txt")
+
+    except Exception as e:
+        print(f"发生错误: {e}")
+    finally:
+        if 'log_file' in locals() and log_file:
+            log_file.close()
 
 if __name__ == "__main__":
     main()
