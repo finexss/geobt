@@ -56,8 +56,8 @@ def extract_domain_and_ip(tracker_url):
             print(f"IP 地址: {ip_addr}")
             return None, str(ip_addr)
         except ValueError:
-            # 提取域名 (包括端口号)
-            domain = netloc
+            # 提取域名 (不包括端口号)
+            domain = netloc.split(':')[0]
             print(f"域名: {domain}")
             return domain, None
 
@@ -111,7 +111,7 @@ def main():
 
     # 清洗域名，移除无效或非域名的条目 (可选，可以根据需要添加更多规则)
     valid_domains = {
-        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(:[0-9]+)?$", domain) or re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+(:[0-9]+)?$", domain)
+        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})?$", domain)
     }
     print(f"去重后，有 {len(valid_domains)} 个域名")
 
