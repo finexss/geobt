@@ -10,7 +10,10 @@ def download_trackers(url):
         response = requests.get(url)
         response.raise_for_status()  # 检查是否有 HTTP 错误
         print(f"下载 {url} 成功，状态码: {response.status_code}")
-        return response.text.splitlines()
+        content = response.text
+        # 使用逗号分割内容
+        trackers = content.split(',')
+        return [tracker.strip() for tracker in trackers]
     except requests.exceptions.RequestException as e:
         print(f"下载 {url} 失败: {e}")
         return []
@@ -18,19 +21,46 @@ def download_trackers(url):
 def extract_domain_and_ip(tracker_url):
     """从 Tracker URL 中提取域名和 IP 地址."""
     try:
-        print(f"原始 Tracker URL: {tracker_url}")  # 打印原始 URL
-        parsed_url = urlparse(tracker_url)
-        print(f"解析后的 URL: {parsed_url}")  # 打印解析后的 URL
-        netloc = parsed_url.netloc
-        print(f"Netloc: {netloc}")  # 打印 netloc
+        print(f"原始 Tracker URL: {tracker_url}")
+
+        # 处理 UDP 协议
+        if tracker_url.startswith("udp://"):
+            # 移除 "udp://" 前缀
+            tracker_url = tracker_url[6:]
+            # 分割域名/IP 和路径
+            parts = tracker_url.split("/", 1)
+            if len(parts) > 0:
+                netloc = parts[0]
+            else:
+                print(f"无法解析 UDP URL: {tracker_url}")
+                return None, None
+        elif tracker_url.startswith("wss://"):
+            # 移除 "wss://" 前缀
+            tracker_url = tracker_url[6:]
+            # 分割域名/IP 和路径
+            parts = tracker_url.split("/", 1)
+            if len(parts) > 0:
+                netloc = parts[0]
+            else:
+                print(f"无法解析 WSS URL: {tracker_url}")
+                return None, None
+        else:
+            parsed_url = urlparse(tracker_url)
+            netloc = parsed_url.netloc
+
+        print(f"Netloc: {netloc}")
+
         # 尝试解析为 IP 地址
         try:
             ip_addr = ipaddress.ip_address(netloc.split(':')[0])  # 同时处理 IPv4 和 IPv6
-            print(f"IP 地址: {ip_addr}")  # 打印 IP 地址
-            return None, str(ip_addr)  # 返回字符串形式的 IP 地址
+            print(f"IP 地址: {ip_addr}")
+            return None, str(ip_addr)
         except ValueError:
-            print(f"域名: {netloc}")  # 打印域名
-            return netloc, None
+            # 提取域名 (包括端口号)
+            domain = netloc
+            print(f"域名: {domain}")
+            return domain, None
+
     except Exception as e:
         print(f"解析 URL {tracker_url} 失败: {e}")
         return None, None
@@ -81,7 +111,7 @@ def main():
 
     # 清洗域名，移除无效或非域名的条目 (可选，可以根据需要添加更多规则)
     valid_domains = {
-        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+$", domain)
+        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(:[0-9]+)?$", domain) or re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})+(:[0-9]+)?$", domain)
     }
     print(f"去重后，有 {len(valid_domains)} 个域名")
 
