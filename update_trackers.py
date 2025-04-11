@@ -122,6 +122,7 @@ def main():
     start_time = datetime.datetime.now()
 
     tracker_list_urls = [
+        "https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7",
         "https://github.com/XIU2/TrackersListCollection/raw/master/all.txt",
         "https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt",
         "https://github.com/XIU2/TrackersListCollection/raw/master/best.txt",
