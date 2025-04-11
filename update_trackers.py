@@ -4,23 +4,25 @@ from urllib.parse import urlparse
 import datetime
 import ipaddress  # 导入 ipaddress 模块
 
-def download_trackers(url):
+def download_trackers(url, log_file):
     """下载 Tracker 列表并返回内容."""
     try:
         response = requests.get(url)
         response.raise_for_status()  # 检查是否有 HTTP 错误
-        print(f"下载 {url} 成功，状态码: {response.status_code}")
+        log_file.write(f"{datetime.datetime.now()}：下载 {url} 成功，状态码: {response.status_code}\n")
         content = response.text
         # 使用逗号分割内容
         trackers = content.split(',')
         return [tracker.strip() for tracker in trackers]
     except requests.exceptions.RequestException as e:
+        log_file.write(f"{datetime.datetime.now()}：下载 {url} 失败: {e}\n")
         print(f"下载 {url} 失败: {e}")
         return []
 
-def extract_domain_and_ip(tracker_url):
+def extract_domain_and_ip(tracker_url, log_file):
     """从 Tracker URL 中提取域名和 IP 地址."""
     try:
+        log_file.write(f"{datetime.datetime.now()}：原始 Tracker URL: {tracker_url}\n")
         print(f"原始 Tracker URL: {tracker_url}")
 
         # 处理 UDP 协议
@@ -32,6 +34,7 @@ def extract_domain_and_ip(tracker_url):
             if len(parts) > 0:
                 netloc = parts[0]
             else:
+                log_file.write(f"{datetime.datetime.now()}：无法解析 UDP URL: {tracker_url}\n")
                 print(f"无法解析 UDP URL: {tracker_url}")
                 return None, None
         elif tracker_url.startswith("wss://"):
@@ -42,26 +45,31 @@ def extract_domain_and_ip(tracker_url):
             if len(parts) > 0:
                 netloc = parts[0]
             else:
+                log_file.write(f"{datetime.datetime.now()}：无法解析 WSS URL: {tracker_url}\n")
                 print(f"无法解析 WSS URL: {tracker_url}")
                 return None, None
         else:
             parsed_url = urlparse(tracker_url)
             netloc = parsed_url.netloc
 
+        log_file.write(f"{datetime.datetime.now()}：Netloc: {netloc}\n")
         print(f"Netloc: {netloc}")
 
         # 尝试解析为 IP 地址
         try:
             ip_addr = ipaddress.ip_address(netloc.split(':')[0])  # 同时处理 IPv4 和 IPv6
+            log_file.write(f"{datetime.datetime.now()}：IP 地址: {ip_addr}\n")
             print(f"IP 地址: {ip_addr}")
             return None, str(ip_addr)
         except ValueError:
             # 提取域名 (不包括端口号)
             domain = netloc.split(':')[0]
+            log_file.write(f"{datetime.datetime.now()}：域名: {domain}\n")
             print(f"域名: {domain}")
             return domain, None
 
     except Exception as e:
+        log_file.write(f"{datetime.datetime.now()}：解析 URL {tracker_url} 失败: {e}\n")
         print(f"解析 URL {tracker_url} 失败: {e}")
         return None, None
 
@@ -93,47 +101,70 @@ def main():
         "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt",
     ]
 
-    all_trackers = []
-    for url in tracker_list_urls:
-        all_trackers.extend(download_trackers(url))
-    print(f"下载了 {len(all_trackers)} 个 Tracker URL")
+    start_time = datetime.datetime.now()
 
-    domains = set()
-    ips = set()
-    for tracker in all_trackers:
-        tracker = tracker.lower().strip()  # 转换为小写并去除空格
-        domain, ip = extract_domain_and_ip(tracker)
-        if domain:
-            domains.add(domain)
-        if ip:
-            ips.add(ip)
-    print(f"去重前，有 {len(domains)} 个域名和 {len(ips)} 个 IP 地址")
+    with open("log.txt", "w") as log_file:
+        log_file.write(f"{datetime.datetime.now()}：程序开始运行\n")
 
-    # 清洗域名，移除无效或非域名的条目 (可选，可以根据需要添加更多规则)
-    valid_domains = {
-        domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})?$", domain)
-    }
-    print(f"去重后，有 {len(valid_domains)} 个域名")
+        all_trackers = []
+        for url in tracker_list_urls:
+            all_trackers.extend(download_trackers(url, log_file))
+        log_file.write(f"{datetime.datetime.now()}：下载了 {len(all_trackers)} 个 Tracker URL\n")
+        print(f"下载了 {len(all_trackers)} 个 Tracker URL")
 
-    # 生成文件内容
-    geosite_txt_content = ""
-    for domain in sorted(valid_domains):
-        geosite_txt_content += f'\t\t    "{domain}",\n'
+        domains = set()
+        ips = set()
+        for tracker in all_trackers:
+            tracker = tracker.lower().strip()  # 转换为小写并去除空格
+            domain, ip = extract_domain_and_ip(tracker, log_file)
+            if domain:
+                domains.add(domain)
+            if ip:
+                ips.add(ip)
+        log_file.write(f"{datetime.datetime.now()}：去重前，有 {len(domains)} 个域名和 {len(ips)} 个 IP 地址\n")
+        print(f"去重前，有 {len(domains)} 个域名和 {len(ips)} 个 IP 地址")
 
-    geoip_txt_content = ""
-    for ip in sorted(ips):
-        geoip_txt_content += f'\t\t    "{ip}",\n'
+        # 清洗域名，移除无效或非域名的条目 (可选，可以根据需要添加更多规则)
+        valid_domains = {
+            domain for domain in domains if re.match(r"^[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,})?$", domain)
+        }
+        log_file.write(f"{datetime.datetime.now()}：去重后，有 {len(valid_domains)} 个域名\n")
+        print(f"去重后，有 {len(valid_domains)} 个域名")
 
-    # 保存文件
-    try:
-        with open("bt-site.txt", "w") as f:
-            f.write(geosite_txt_content)
-        print("成功生成 bt-site.txt")
-        with open("bt-ip.txt", "w") as f:
-            f.write(geoip_txt_content)
-        print("成功生成 bt-ip.txt")
-    except IOError as e:
-        print(f"保存文件失败: {e}")
+        # 生成文件内容
+        geosite_txt_content = ""
+        for domain in sorted(valid_domains):
+            geosite_txt_content += f'\t\t    "{domain}",\n'
+
+        geoip_txt_content = ""
+        for ip in sorted(ips):
+            geoip_txt_content += f'\t\t    "{ip}",\n'
+
+        # 保存文件
+        try:
+            with open("bt-site.txt", "w") as f:
+                f.write(geosite_txt_content)
+            log_file.write(f"{datetime.datetime.now()}：成功生成 bt-site.txt\n")
+            print("成功生成 bt-site.txt")
+            with open("bt-ip.txt", "w") as f:
+                f.write(geoip_txt_content)
+            log_file.write(f"{datetime.datetime.now()}：成功生成 bt-ip.txt\n")
+            print("成功生成 bt-ip.txt")
+        except IOError as e:
+            log_file.write(f"{datetime.datetime.now()}：保存文件失败: {e}\n")
+            print(f"保存文件失败: {e}")
+
+        end_time = datetime.datetime.now()
+        duration = end_time - start_time
+
+        log_file.write(f"{datetime.datetime.now()}：程序运行结束，耗时: {duration}\n")
+        log_file.write(f"{datetime.datetime.now()}：总结：\n")
+        log_file.write(f"{datetime.datetime.now()}：  - 下载了 {len(all_trackers)} 个 Tracker URL\n")
+        log_file.write(f"{datetime.datetime.now()}：  - 去重前，有 {len(domains)} 个域名和 {len(ips)} 个 IP 地址\n")
+        log_file.write(f"{datetime.datetime.now()}：  - 去重后，有 {len(valid_domains)} 个域名\n")
+
+        print(f"程序运行结束，耗时: {duration}")
+        print("详细信息请查看 log.txt")
 
 if __name__ == "__main__":
     main()
