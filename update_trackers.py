@@ -2,7 +2,8 @@ import requests
 import re
 from urllib.parse import urlparse
 import datetime
-import ipaddress  # 导入 ipaddress 模块
+import ipaddress
+import tldextract  # 导入 tldextract 模块
 
 def download_trackers(url, log_file):
     """下载 Tracker 列表并返回内容."""
@@ -19,6 +20,19 @@ def download_trackers(url, log_file):
         log_file.write(f"{datetime.datetime.now()}：下载 {url} 失败: {e}\n")
         print(f"下载 {url} 失败: {e}")
         return []
+
+def extract_domain(url, log_file):
+    """使用 tldextract 提取域名."""
+    try:
+        ext = tldextract.extract(url)
+        domain = f"{ext.domain}.{ext.suffix}"
+        log_file.write(f"{datetime.datetime.now()}：使用 tldextract 提取域名: {domain} from {url}\n")
+        print(f"使用 tldextract 提取域名: {domain} from {url}")
+        return domain
+    except Exception as e:
+        log_file.write(f"{datetime.datetime.now()}：使用 tldextract 提取域名失败: {e} from {url}\n")
+        print(f"使用 tldextract 提取域名失败: {e} from {url}")
+        return None
 
 def extract_domain_and_ip(tracker_url, log_file):
     """从 Tracker URL 中提取域名和 IP 地址."""
@@ -63,6 +77,11 @@ def extract_domain_and_ip(tracker_url, log_file):
             print(f"域名: {domain}")
             domain = domain
 
+            # 使用 tldextract 提取域名
+            extracted_domain = extract_domain(tracker_url, log_file)
+            if extracted_domain:
+                domain = extracted_domain
+
     except Exception as e:
         log_file.write(f"{datetime.datetime.now()}：解析 URL {tracker_url} 失败: {e}\n")
         print(f"解析 URL {tracker_url} 失败: {e}")
@@ -95,6 +114,9 @@ def main():
         "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt",
         "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt",
         "https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt",
+        "https://newtrackon.com/api/all",
+        "https://github.com/anthrax10/trakx/blob/master/public/trackers.txt",
+        "https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt",
     ]
 
     start_time = datetime.datetime.now()
