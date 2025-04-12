@@ -10,12 +10,13 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.11' #建议使用具体版本
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -39,8 +40,8 @@ jobs:
             # 获取当前时间作为提交信息的一部分
             COMMIT_TIME=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')
             # 获取新增域名和IP数量，用于提交信息（从log.txt最后几行提取）
-            ADDED_DOMAINS=$(tail -n 5 log.txt | grep '提取的唯一域名数 (本次):' | awk '{print $NF}')
-            ADDED_IPS=$(tail -n 5 log.txt | grep '提取的唯一 IP 地址数 (本次):' | awk '{print $NF}')
+            ADDED_DOMAINS=$(tail -n 5 log.txt | grep '提取的唯一域名数 (本次):' | awk '{print $NF}') || ADDED_DOMAINS="N/A" # Handle grep failure
+            ADDED_IPS=$(tail -n 5 log.txt | grep '提取的唯一 IP 地址数 (本次):' | awk '{print $NF}') || ADDED_IPS="N/A" # Handle grep failure
             git commit -m "Update BT lists at ${COMMIT_TIME} - Added Domains: ${ADDED_DOMAINS}, Added IPs: ${ADDED_IPS}"
             # 使用 token 推送
             git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" main
