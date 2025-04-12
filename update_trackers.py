@@ -55,6 +55,11 @@ TRACKER_URLS_TEXT = """
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt
+    https://trackerslist.com/all.txt
+    https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt
+    https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
+    https://github.com/user-attachments/files/17001768/trackerlist.txt
+    https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
 """
 
 # --- Setup Detailed Logging ---
