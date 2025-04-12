@@ -53,6 +53,11 @@ TRACKER_URLS_TEXT = """
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt
+    https://trackerslist.com/all.txt
+    https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt
+    https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
+    https://github.com/user-attachments/files/17001768/trackerlist.txt
+    https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
 """
 
 # --- Setup Detailed Logging ---
@@ -73,104 +78,92 @@ logger.addHandler(stream_handler)
 
 def parse_urls_from_text(text):
     """Parses URLs from the multiline text."""
+    # ... (same as V5) ...
     urls = []
     for line in text.strip().splitlines():
         line = line.strip()
         if line and not line.startswith(('#', '//')):
-            # Basic check if it looks like a URL or domain structure
             if re.match(r'^(https?|udp|wss?)://', line) or '.' in line:
-                urls.append(line)
+              urls.append(line)
             else:
-                logger.warning(f"Skipping line in URL list (doesn't look like URL/domain): {line}")
+              logger.warning(f"Skipping line in URL list (doesn't look like URL/domain): {line}")
     return urls
 
-def clean_html_and_extract_urls(text):
-    """Removes basic HTML tags and extracts potential URLs."""
-    # Basic removal of HTML tags
-    text_no_html = re.sub(r'<[^>]+>', '', text)
-    # Find potential URLs using a more specific regex after cleaning
-    potential_urls = re.findall(r'(?:udp|https?|wss)://(?:\[[a-fA-F0-9:]+\]|[^:/\s\'"<>]+)(?::\d+)?(?:/[^\s\'"<>]*)?', text_no_html)
-    return [url.strip() for url in potential_urls if url]
-
 def download_and_split_trackers(url):
-    """Downloads tracker list and splits into individual tracker entries."""
+    """Downloads tracker list and splits into individual tracker entries. V6"""
     tracker_entries = set()
+    is_json_attempted = False
     try:
         logger.info(f"开始下载: {url}")
         headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(url, timeout=20, headers=headers, stream=True)
+        response = requests.get(url, timeout=20, headers=headers) # Remove stream=True for now
         response.raise_for_status()
         content_type = response.headers.get('content-type', '').lower()
         logger.info(f"下载成功: {url} (状态码: {response.status_code}, 类型: {content_type})")
 
-        # --- V5: Refined Splitting Logic ---
-        is_json_attempted = False
+        # Determine encoding and decode with error handling
+        encoding = response.encoding if response.encoding else 'utf-8' # Guess encoding or default to utf-8
+        try:
+            full_content = response.content.decode(encoding, errors='ignore')
+            logger.debug(f"使用编码 '{encoding}' 解码内容成功 (来自: {url})")
+        except Exception as decode_error:
+            logger.error(f"解码内容失败 (encoding: {encoding}), 尝试 UTF-8 with ignore: {decode_error} (来自: {url})")
+            full_content = response.content.decode('utf-8', errors='ignore') # Fallback safely
+
+        # --- Processing Logic ---
+        # Attempt JSON first if applicable
         if 'json' in content_type or url.endswith('/api/all'):
             is_json_attempted = True
             try:
-                 # Read the full content for JSON parsing
-                 full_content = response.content.decode('utf-8', errors='ignore')
-                 data = json.loads(full_content)
+                 data = json.loads(full_content) # Use already decoded content
                  if isinstance(data, list):
-                     count = 0
-                     for item in data:
-                         if isinstance(item, str):
-                             entry = item.strip()
-                             if entry:
-                                 # Further clean potential HTML remnants even from JSON
-                                 cleaned_entries = clean_html_and_extract_urls(unquote(entry))
-                                 if cleaned_entries:
-                                     tracker_entries.update(cleaned_entries)
-                                     logger.debug(f"Added from JSON list: {cleaned_entries}")
-                                     count += len(cleaned_entries)
-                                 elif '.' in entry or ':' in entry: # Keep simple domain/ip if clean fails
-                                      tracker_entries.add(unquote(entry))
-                                      logger.debug(f"Added simple entry from JSON list: {unquote(entry)}")
-                                      count += 1
-
-                     logger.info(f"从 JSON {url} 解析了 {count} 个条目")
+                      count = 0
+                      for item in data:
+                           if isinstance(item, str):
+                               entry = item.strip()
+                               if entry:
+                                   cleaned_entries = clean_html_and_extract_urls(unquote(entry)) # Clean HTML etc.
+                                   if cleaned_entries:
+                                       tracker_entries.update(cleaned_entries)
+                                       count += len(cleaned_entries)
+                                   elif '.' in entry or ':' in entry:
+                                        tracker_entries.add(unquote(entry))
+                                        count += 1
+                      logger.info(f"从 JSON {url} 解析了 {count} 个条目")
+                      return list(tracker_entries) # Return early
                  else:
-                     logger.warning(f"URL 返回了非列表的 JSON ({type(data)})，未处理: {url}")
-                 return list(tracker_entries) # Return early if JSON was successfully processed
+                     logger.warning(f"URL 返回了非列表的 JSON ({type(data)})，回退到文本处理: {url}")
             except json.JSONDecodeError:
                  logger.warning(f"URL {url} 检测到 JSON 类型但解析失败，将尝试文本分割。")
-            except Exception as e:
-                 logger.error(f"处理 JSON 内容时出错 ({url}): {e}")
-                 # Fall through to text processing if JSON handling fails
+            # Fall through to text if JSON fails or isn't list
 
-        # --- Text Processing (if not JSON or JSON failed) ---
-        processed_lines = 0
-        for line in response.iter_lines(decode_unicode=True, errors='ignore'):
-            processed_lines +=1
-            if not line: continue
+        # --- Text Processing ---
+        lines = full_content.splitlines()
+        for line in lines:
             line = line.strip()
             line_no_comment = line.split('#', 1)[0].strip()
             if not line_no_comment: continue
 
-            # V5 Fix: Use regex to find potential tracker URLs within the line
-            # This handles comments better and extracts URLs even if mixed with other text
-            # It also helps clean the HTML remnants seen in logs '/>udp://...'
-            found_urls = re.findall(r'(?:udp|https?|wss)://(?:\[[a-fA-F0-9:]+\]|[^:/\s\'"<>]+)(?::\d+)?(?:/[^\s\'"<>]*)?', line_no_comment)
+            potential_entries = []
+            if ',' in line_no_comment:
+                potential_entries = [p.strip() for p in line_no_comment.split(',') if p.strip()]
+            else:
+                potential_entries = [p.strip() for p in re.split(r'\s+', line_no_comment) if p.strip()]
 
-            if found_urls:
-                for found_url in found_urls:
+            for entry in potential_entries:
+                # Apply same robust filtering as download function V3
+                if len(entry) > 3 and ('.' in entry or ':' in entry or '[' in entry) and entry != 'tracker_proxy':
                     try:
-                        decoded_entry = unquote(found_url.strip())
-                        if decoded_entry:
-                             tracker_entries.add(decoded_entry)
-                             logger.debug(f"从文本行通过 Regex 添加: '{decoded_entry}' (来自 {url})")
+                        decoded_entry = unquote(entry)
+                        if not re.match(r"^(https?|udp|wss):$", decoded_entry.lower()):
+                            tracker_entries.add(decoded_entry)
+                            logger.debug(f"Added potential entry: '{decoded_entry}' (from {url})")
+                        else:
+                            logger.warning(f"忽略解码后看起来无效的协议条目: '{decoded_entry}' (来自: {url})")
                     except Exception as decode_err:
-                         logger.error(f"URL 解码失败 for '{found_url}': {decode_err}")
-            elif '.' in line_no_comment or ':' in line_no_comment:
-                 # If no full URL found, but line has potential hosts, treat the whole line as one entry
-                 # (This covers cases where a source just lists domains/IPs)
-                 try:
-                     decoded_entry = unquote(line_no_comment)
-                     if decoded_entry:
-                         tracker_entries.add(decoded_entry)
-                         logger.debug(f"将整行非注释部分作为条目添加: '{decoded_entry}' (来自 {url})")
-                 except Exception as decode_err:
-                     logger.error(f"URL 解码失败 for line '{line_no_comment}': {decode_err}")
+                        logger.error(f"URL 解码失败 for '{entry}': {decode_err}")
+                elif logger.level == logging.DEBUG: # Log other discards only in debug
+                    logger.debug(f"忽略无效或过短的条目: '{entry}' (来自行: '{line}' in {url})")
 
     except requests.exceptions.Timeout:
         logger.error(f"下载超时: {url}")
@@ -182,6 +175,7 @@ def download_and_split_trackers(url):
     logger.info(f"从 {url} 提取了 {len(tracker_entries)} 个唯一有效条目 (JSON尝试: {is_json_attempted})")
     return list(tracker_entries)
 
+# extract_domain_or_ip and other utility functions remain the same as V5
 def extract_domain_or_ip(tracker_entry):
     """Extracts domain (no port) or IP address from a tracker entry. V5"""
     domain = None
@@ -190,7 +184,7 @@ def extract_domain_or_ip(tracker_entry):
     logger.debug(f"开始处理条目: {original_entry}")
 
     try:
-        # 1. Add default scheme if missing, needed for urlparse
+        # 1. Use urlparse, adding default scheme if needed
         if not re.match(r"^\w+://", tracker_entry):
              temp_netloc_guess = tracker_entry.split('/', 1)[0]
              if '.' in temp_netloc_guess or ':' in temp_netloc_guess or (temp_netloc_guess.startswith('[') and temp_netloc_guess.endswith(']')):
@@ -257,12 +251,13 @@ def extract_domain_or_ip(tracker_entry):
             if re.match(r"^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$", domain_candidate):
                 try:
                     ext = tldextract.extract(domain_candidate)
-                    if ext.suffix and ext.domain: # Must have domain and suffix
+                    # Final check: BOTH suffix AND domain part must be found by tldextract
+                    if ext.suffix and ext.domain:
                         domain = domain_candidate
                         logger.debug(f"识别为有效域名: {domain} (来自: {original_entry})")
                     else:
-                         logger.warning(f"tldextract 无法验证域名/后缀: '{domain_candidate}' (来自: {original_entry}), 已丢弃")
-                         domain = None
+                        logger.warning(f"tldextract 无法验证域名/后缀: '{domain_candidate}' (来自: {original_entry}), 已丢弃")
+                        domain = None
                 except Exception as tld_e:
                      logger.error(f"tldextract 在验证 '{domain_candidate}' 时出错: {tld_e}. 已丢弃.")
                      domain = None # Discard if tldextract errors
@@ -275,9 +270,7 @@ def extract_domain_or_ip(tracker_entry):
 
     return domain, ip
 
-# --- Utility Functions (Remain the same)---
 def read_existing_items(filepath):
-    # ... (same as V4) ...
      items = set()
      if not os.path.exists(filepath):
          logger.info(f"文件不存在，将创建新文件: {filepath}")
@@ -294,7 +287,6 @@ def read_existing_items(filepath):
      return items
 
 def append_items_to_txt(filepath, items_to_add):
-    # ... (same as V4) ...
     if not items_to_add:
         logger.info(f"没有新条目需要追加到 {filepath}")
         return
@@ -310,7 +302,6 @@ def append_items_to_txt(filepath, items_to_add):
         logger.error(f"追加写入文件 {filepath} 失败: {e}")
 
 def write_json_like_file(filepath, all_items):
-    # ... (same as V4) ...
     lines = []
     for item in sorted(list(all_items)):
         lines.append(f'\t\t    "{item}",')
@@ -324,14 +315,13 @@ def write_json_like_file(filepath, all_items):
         logger.error(f"覆盖写入文件 {filepath} 失败: {e}")
 
 def write_summary_log(data):
-    # ... (same as V4) ...
     duration_td = datetime.timedelta(seconds=data['duration_seconds'])
     duration_str = str(duration_td).split('.')[0] # HH:MM:SS format
     summary = f"""
 --- 运行总结 ({data['timestamp']}) ---
 总耗时: {duration_str}
 处理的 URL 数量: {data['url_count']}
-收集的原始条目数: {data['raw_entries']}
+收集的原始条目数: {data['raw_entries']} ({data['unique_raw_entries']} unique)
 提取的唯一域名数 (本次): {data['new_domains_count']} (总计: {data['total_domains']})
 提取的唯一 IP 地址数 (本次): {data['new_ips_count']} (总计: {data['total_ips']})
 -------------------------------------
@@ -348,7 +338,6 @@ def write_summary_log(data):
 
 # --- Main Execution ---
 def main():
-    # ...(Main logic remains the same as V4)...
     logger.info("脚本开始运行")
     start_time = time.time()
 
@@ -364,20 +353,23 @@ def main():
         if entries:
             all_tracker_entries.extend(entries)
 
-    logger.info(f"总共收集到 {len(all_tracker_entries)} 个潜在 Tracker 条目")
+    # Deduplicate raw entries BEFORE processing
+    unique_raw_entries = set(all_tracker_entries)
+    logger.info(f"总共收集到 {len(all_tracker_entries)} 个原始条目，去重后 {len(unique_raw_entries)} 个唯一原始条目")
 
     current_domains = set()
     current_ips = set()
     processed_count = 0
-    for entry in all_tracker_entries:
+    # Process the unique raw entries
+    for entry in unique_raw_entries:
         processed_count += 1
         domain, ip = extract_domain_or_ip(entry)
         if ip:
             current_ips.add(ip)
         elif domain:
-            current_domains.add(domain) # Domain validation is now inside extract
+            current_domains.add(domain)
 
-    logger.info(f"处理完成 {processed_count} 个条目")
+    logger.info(f"处理完成 {processed_count} 个唯一原始条目")
     logger.info(f"本次运行提取到 {len(current_domains)} 个唯一域名和 {len(current_ips)} 个唯一 IP 地址")
 
     added_domains = current_domains - existing_domains
@@ -399,7 +391,8 @@ def main():
         'timestamp': datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'duration_seconds': duration_seconds,
         'url_count': len(tracker_list_urls),
-        'raw_entries': len(all_tracker_entries),
+        'raw_entries': len(all_tracker_entries), # Total including duplicates from sources
+        'unique_raw_entries': len(unique_raw_entries), # Unique entries before processing
         'new_domains_count': len(added_domains),
         'total_domains': len(all_final_domains),
         'new_ips_count': len(added_ips),
