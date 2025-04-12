@@ -151,6 +151,11 @@ def main():
         "https://newtrackon.com/api/all", # 注意：这个可能是JSON或单行逗号分隔
         # "https://github.com/anthrax10/trakx/blob/master/public/trackers.txt", # 这个是HTML页面，需要特殊处理，暂时注释
         "https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt",
+        "https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt",
+        "https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt",
+        "https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt",
+        "https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt",
+        "https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt",
     ]
 
     all_tracker_entries = []
