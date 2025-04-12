@@ -23,13 +23,27 @@ jobs:
           pip install requests
           pip install tldextract
 
-      - name: Run script
-        run: python update_trackers.py
+      - name: Run script to generate lists
+        run: python update_trackers.py # 确保脚本名是这个
 
       - name: Commit and push changes
         run: |
           git config --local user.name "github-actions[bot]"
-          git config --local user.email "154498355+github-actions[bot]@users.noreply.github.com"
-          git add bt-site.txt bt-ip.txt
-          git commit -m "Update tracker list" -a || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          git config --local user.email "${{ github.actor_id }}+github-actions[bot]@users.noreply.github.com"
+          # 添加所有生成和修改的文件
+          git add bt-site.json bt-ip.json bt-site.txt bt-ip.txt log.txt logall.txt
+          # 检查是否有更改
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            # 获取当前时间作为提交信息的一部分
+            COMMIT_TIME=$(TZ=Asia/Shanghai date +'%Y-%m-%d %H:%M:%S')
+            # 获取新增域名和IP数量，用于提交信息（从log.txt最后几行提取）
+            ADDED_DOMAINS=$(tail -n 5 log.txt | grep '提取的唯一域名数 (本次):' | awk '{print $NF}')
+            ADDED_IPS=$(tail -n 5 log.txt | grep '提取的唯一 IP 地址数 (本次):' | awk '{print $NF}')
+            git commit -m "Update BT lists at ${COMMIT_TIME} - Added Domains: ${ADDED_DOMAINS}, Added IPs: ${ADDED_IPS}"
+            # 使用 token 推送
+            git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" main
+            echo "Changes pushed successfully."
+          fi
+        continue-on-error: false
