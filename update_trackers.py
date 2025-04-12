@@ -48,7 +48,6 @@ TRACKER_URLS_TEXT = """
     https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt
     https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
     https://newtrackon.com/api/all
-    # https://github.com/anthrax10/trakx/blob/master/public/trackers.txt # HTML
     https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt
     https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt
     https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt
