@@ -1,3 +1,4 @@
+# --- Imports and other functions remain the same as V8/V7 ---
 import requests
 import re
 from urllib.parse import urlparse, unquote
@@ -10,7 +11,7 @@ import os
 import time
 import json
 
-# --- Constants --- (Same as V7)
+# --- Constants --- (Same)
 SITE_JSON_FILE = "bt-site.json"
 IP_JSON_FILE = "bt-ip.json"
 SITE_TXT_FILE = "bt-site.txt" # Incremental, one item per line
@@ -18,7 +19,7 @@ IP_TXT_FILE = "bt-ip.txt"   # Incremental, one item per line
 LOG_ALL_FILE = "logall.txt" # Detailed log for the current run (overwrite)
 LOG_SUMMARY_FILE = "log.txt" # Summary log (newest on top)
 
-# --- Configuration --- (Same as V7)
+# --- Configuration --- (Same)
 TRACKER_URLS_TEXT = """
     https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
     https://www.gbsat.org/bt/tracker.txt
@@ -61,34 +62,30 @@ TRACKER_URLS_TEXT = """
     https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
 """
 
-# --- Setup Detailed Logging ---
-# (Logging setup remains the same as V7)
+# --- Setup Detailed Logging --- (Same as V7)
 log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-detail_logger = logging.getLogger('detailed_logger') # Separate logger for detailed log
-detail_logger.setLevel(logging.INFO) # Or DEBUG if needed
+detail_logger = logging.getLogger('detailed_logger')
+detail_logger.setLevel(logging.INFO)
 detail_logger.handlers.clear()
-
 log_all_handler = logging.FileHandler(LOG_ALL_FILE, mode='w', encoding='utf-8')
 log_all_handler.setFormatter(log_formatter)
 detail_logger.addHandler(log_all_handler)
-
-stream_handler = logging.StreamHandler(sys.stdout) # Console output handler
+stream_handler = logging.StreamHandler(sys.stdout)
 stream_handler.setFormatter(log_formatter)
-stream_handler.setLevel(logging.INFO) # Console shows INFO and above
-detail_logger.addHandler(stream_handler) # Detailed logger also outputs INFO+ to console
-
-# --- Summary Logger ---
+stream_handler.setLevel(logging.INFO)
+detail_logger.addHandler(stream_handler)
 summary_logger = logging.getLogger('summary_logger')
 summary_logger.setLevel(logging.INFO)
 
 # --- Function Definitions ---
 
 def parse_urls_from_text(text):
-    # ... (same as V7) ...
+    # ... (Same as V7) ...
     urls = []
     for line in text.strip().splitlines():
         line = line.strip()
         if line and not line.startswith(('#', '//')):
+            # Allow http/https/udp/wss protocols or lines containing a dot
             if re.match(r'^(https?|udp|wss?)://', line) or '.' in line:
               urls.append(line)
             else:
@@ -96,7 +93,7 @@ def parse_urls_from_text(text):
     return urls
 
 def download_and_split_trackers(url):
-    # ... (same as V7) ...
+    # ... (Same as V7) ...
     tracker_entries = set()
     is_json_attempted = False
     try:
@@ -180,25 +177,20 @@ def download_and_split_trackers(url):
     return list(tracker_entries)
 
 def clean_html_and_extract_urls(text):
-    """Removes basic HTML tags and extracts potential URLs."""
-    # Basic removal of HTML tags like <br />
+    # ... (Same as V7) ...
     text_no_html = re.sub(r'<[^>]+>', '', text)
-    # Find potential URLs using a more specific regex after cleaning
     potential_urls = re.findall(r'(?:udp|https?|wss)://(?:\[[a-fA-F0-9:]+\]|[^:/\s\'"<>]+)(?::\d+)?(?:/[^\s\'"<>]*)?', text_no_html)
-    # Also add back the original if it wasn't found by regex but seems ok
     cleaned_text = text_no_html.strip()
     if not potential_urls and '.' in cleaned_text:
          potential_urls.append(cleaned_text)
-
     return [url.strip() for url in potential_urls if url]
 
 def extract_domain_or_ip(tracker_entry):
-    # ... (same as V7) ...
+    # ... (Same as V7) ...
     domain = None
     ip = None
     original_entry = tracker_entry
     detail_logger.debug(f"开始处理条目: {original_entry}")
-
     try:
         if not re.match(r"^\w+://", tracker_entry):
              temp_netloc_guess = tracker_entry.split('/', 1)[0]
@@ -276,7 +268,7 @@ def extract_domain_or_ip(tracker_entry):
     return domain, ip
 
 def read_existing_items(filepath):
-    # ... (same as V7) ...
+    # ... (Same as V7) ...
      items = set()
      if not os.path.exists(filepath):
          detail_logger.info(f"文件不存在，将创建新文件: {filepath}")
@@ -292,7 +284,7 @@ def read_existing_items(filepath):
          detail_logger.error(f"读取文件 {filepath} 失败: {e}")
      return items
 
-# --- V8: Revised append_items_to_txt ---
+# --- V9: Revised append_items_to_txt ---
 def append_items_to_txt(filepath, items_to_add):
     """Appends new items (one per line) to a txt file, avoiding extra blank lines."""
     if not items_to_add:
@@ -301,34 +293,33 @@ def append_items_to_txt(filepath, items_to_add):
     try:
         os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
 
-        prefix_newline = False
+        prefix = "" # Default to no prefix
+
+        # Check if file exists and needs a starting newline
         if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
-            # Check the very last character of the file
-            with open(filepath, 'rb') as f: # Open in binary to read last byte
+            with open(filepath, 'rb') as f:
                 try:
                     f.seek(-1, os.SEEK_END)
                     last_char = f.read(1)
                     if last_char != b'\n':
-                        prefix_newline = True # Need a newline if last char wasn't one
-                except OSError: # Handle empty file case after check
-                    pass # Empty file, no prefix needed
-        elif not os.path.exists(filepath):
-            pass # New file, no prefix needed
+                        prefix = "\n" # Needs newline if last char wasn't one
+                except OSError:
+                     # File exists but couldn't seek (e.g., empty but size > 0?), safer to add newline
+                      prefix = "\n"
+        # No prefix needed for new or truly empty file
+
+        # Prepare the sorted list of items to add
+        new_content = "\n".join(sorted(list(items_to_add)))
 
         with open(filepath, "a", encoding='utf-8') as f:
-            content_to_write = ""
-            if prefix_newline:
-                content_to_write += "\n"
-            # Join new items with newline, ensure the entire block ends with one newline
-            content_to_write += "\n".join(sorted(list(items_to_add))) + "\n"
-            f.write(content_to_write)
+            f.write(prefix + new_content + "\n") # Write prefix, content, and ensure final newline
 
         detail_logger.info(f"向 {filepath} 增量添加了 {len(items_to_add)} 个条目")
     except IOError as e:
         detail_logger.error(f"追加写入文件 {filepath} 失败: {e}")
 
 def write_json_like_file(filepath, all_items):
-    # ... (same as V7) ...
+    # ... (Same as V7) ...
      lines = []
      for item in sorted(list(all_items)):
          lines.append(f'\t\t    "{item}",')
@@ -342,8 +333,7 @@ def write_json_like_file(filepath, all_items):
          detail_logger.error(f"覆盖写入文件 {filepath} 失败: {e}")
 
 def write_summary_log(data, added_domains, added_ips):
-    """Writes summary to logall.txt and prepends it to log.txt (reverse chronological)."""
-    # ... (Formatting and logging to logall.txt remains the same as V7) ...
+    # ... (Same as V7, including reverse chronological logic) ...
     duration_td = datetime.timedelta(seconds=data['duration_seconds'])
     duration_str = str(duration_td).split('.')[0]
 
@@ -366,12 +356,10 @@ def write_summary_log(data, added_domains, added_ips):
   新增 IP: [{added_ips_str if added_ips else '无'}]
 -------------------------------------"""
 
-    # Log summary to detailed log (logall.txt)
     detail_logger.info("--- 运行总结 ---")
     for line in summary_block.strip().splitlines():
         detail_logger.info(line)
 
-    # --- V7 Change: Prepend summary to summary log (log.txt) ---
     try:
         os.makedirs(os.path.dirname(LOG_SUMMARY_FILE) or '.', exist_ok=True)
         existing_log_content = ""
@@ -382,9 +370,8 @@ def write_summary_log(data, added_domains, added_ips):
             except Exception as read_err:
                  detail_logger.error(f"读取现有总结日志 {LOG_SUMMARY_FILE} 失败: {read_err}")
 
-        # Write new content (New summary + separator + old content)
         with open(LOG_SUMMARY_FILE, "w", encoding='utf-8') as f_write:
-            f_write.write(summary_block.strip() + "\n\n") # Ensures separation
+            f_write.write(summary_block.strip() + "\n\n")
             f_write.write(existing_log_content)
 
         summary_logger.info("写入运行总结到 " + LOG_SUMMARY_FILE + " (最新在顶部)")
@@ -393,9 +380,8 @@ def write_summary_log(data, added_domains, added_ips):
         detail_logger.error(f"写入/更新总结日志 {LOG_SUMMARY_FILE} 失败: {e}")
         summary_logger.error(f"写入/更新总结日志 {LOG_SUMMARY_FILE} 失败: {e}")
 
-# --- Main Execution ---
+# --- Main Execution --- (Same as V7)
 def main():
-    # ... (same as V7) ...
     detail_logger.info("脚本开始运行")
     start_time = time.time()
 
