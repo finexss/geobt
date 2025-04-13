@@ -63,6 +63,7 @@ TRACKER_URLS_TEXT = """
     https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt
     https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt
     https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt
+    https://trackers.run/s/wp_up_hp_hs_v4_v6.txt
 """
 
 # --- Setup Detailed Logging --- (Same as V7)
