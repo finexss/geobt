@@ -60,6 +60,9 @@ TRACKER_URLS_TEXT = """
     https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
     https://github.com/user-attachments/files/17001768/trackerlist.txt
     https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
+    https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt
+    https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt
+    https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt
 """
 
 # --- Setup Detailed Logging --- (Same as V7)
