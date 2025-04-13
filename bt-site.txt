@@ -1114,3 +1114,6 @@ zephir.monocul.us
 zer0day.000webhostapp.com
 zer0day.ch
 zer0day.to
+share.dmhy.org
+t-115.rhcloud.com
+t2.popgo.org
