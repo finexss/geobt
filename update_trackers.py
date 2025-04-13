@@ -10,7 +10,7 @@ import os
 import time
 import json
 
-# --- Constants ---
+# --- Constants --- (Same as V7)
 SITE_JSON_FILE = "bt-site.json"
 IP_JSON_FILE = "bt-ip.json"
 SITE_TXT_FILE = "bt-site.txt" # Incremental, one item per line
@@ -18,7 +18,7 @@ IP_TXT_FILE = "bt-ip.txt"   # Incremental, one item per line
 LOG_ALL_FILE = "logall.txt" # Detailed log for the current run (overwrite)
 LOG_SUMMARY_FILE = "log.txt" # Summary log (newest on top)
 
-# --- Configuration ---
+# --- Configuration --- (Same as V7)
 TRACKER_URLS_TEXT = """
     https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
     https://www.gbsat.org/bt/tracker.txt
@@ -54,9 +54,15 @@ TRACKER_URLS_TEXT = """
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt
     https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt
+    https://trackerslist.com/all.txt
+    https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt
+    https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
+    https://github.com/user-attachments/files/17001768/trackerlist.txt
+    https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
 """
 
-# --- Setup Detailed Logging (logall.txt) ---
+# --- Setup Detailed Logging ---
+# (Logging setup remains the same as V7)
 log_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 detail_logger = logging.getLogger('detailed_logger') # Separate logger for detailed log
 detail_logger.setLevel(logging.INFO) # Or DEBUG if needed
@@ -68,18 +74,17 @@ detail_logger.addHandler(log_all_handler)
 
 stream_handler = logging.StreamHandler(sys.stdout) # Console output handler
 stream_handler.setFormatter(log_formatter)
-stream_handler.setLevel(logging.INFO)
+stream_handler.setLevel(logging.INFO) # Console shows INFO and above
 detail_logger.addHandler(stream_handler) # Detailed logger also outputs INFO+ to console
 
-# --- Summary Logger (log.txt - append mode handled differently later) ---
-summary_logger = logging.getLogger('summary_logger') # Separate logger for summary logic
+# --- Summary Logger ---
+summary_logger = logging.getLogger('summary_logger')
 summary_logger.setLevel(logging.INFO)
-# We won't add file handlers here, write_summary_log handles file IO
 
 # --- Function Definitions ---
 
 def parse_urls_from_text(text):
-    """Parses URLs from the multiline text."""
+    # ... (same as V7) ...
     urls = []
     for line in text.strip().splitlines():
         line = line.strip()
@@ -91,7 +96,7 @@ def parse_urls_from_text(text):
     return urls
 
 def download_and_split_trackers(url):
-    """Downloads and intelligently splits tracker list from a URL."""
+    # ... (same as V7) ...
     tracker_entries = set()
     is_json_attempted = False
     try:
@@ -111,7 +116,6 @@ def download_and_split_trackers(url):
             full_content = response.content.decode('utf-8', errors='ignore')
 
         # --- Processing Logic ---
-        # (JSON handling and text splitting logic remains the same as V6)
         if 'json' in content_type or url.endswith('/api/all'):
              is_json_attempted = True
              try:
@@ -134,7 +138,7 @@ def download_and_split_trackers(url):
                      detail_logger.info(f"从 JSON {url} 解析了 {count} 个条目")
                  else:
                      detail_logger.warning(f"URL 返回了非列表的 JSON ({type(data)})，回退到文本处理: {url}")
-                 if isinstance(data, list): return list(tracker_entries) # Return early only if it was list JSON
+                 if isinstance(data, list): return list(tracker_entries)
              except json.JSONDecodeError:
                  detail_logger.warning(f"URL {url} 检测到 JSON 类型但解析失败，将尝试文本分割。")
 
@@ -152,7 +156,7 @@ def download_and_split_trackers(url):
                 potential_entries = [p.strip() for p in re.split(r'\s+', line_no_comment) if p.strip()]
 
             for entry in potential_entries:
-                if len(entry) > 3 and ('.' in entry or ':' in entry or '[' in entry) and entry != 'tracker_proxy':
+                 if len(entry) > 3 and ('.' in entry or ':' in entry or '[' in entry) and entry != 'tracker_proxy':
                     try:
                         decoded_entry = unquote(entry)
                         if not re.match(r"^(https?|udp|wss):$", decoded_entry.lower()):
@@ -162,7 +166,7 @@ def download_and_split_trackers(url):
                              detail_logger.warning(f"忽略解码后看起来无效的协议条目: '{decoded_entry}' (来自: {url})")
                     except Exception as decode_err:
                          detail_logger.error(f"URL 解码失败 for '{entry}': {decode_err}")
-                elif detail_logger.level <= logging.DEBUG: # Log other discards only in debug
+                 elif detail_logger.level <= logging.DEBUG:
                     detail_logger.debug(f"忽略无效或过短的条目: '{entry}' (来自行: '{line}' in {url})")
 
     except requests.exceptions.Timeout:
@@ -175,15 +179,27 @@ def download_and_split_trackers(url):
     detail_logger.info(f"从 {url} 提取了 {len(tracker_entries)} 个唯一有效条目 (JSON尝试: {is_json_attempted})")
     return list(tracker_entries)
 
+def clean_html_and_extract_urls(text):
+    """Removes basic HTML tags and extracts potential URLs."""
+    # Basic removal of HTML tags like <br />
+    text_no_html = re.sub(r'<[^>]+>', '', text)
+    # Find potential URLs using a more specific regex after cleaning
+    potential_urls = re.findall(r'(?:udp|https?|wss)://(?:\[[a-fA-F0-9:]+\]|[^:/\s\'"<>]+)(?::\d+)?(?:/[^\s\'"<>]*)?', text_no_html)
+    # Also add back the original if it wasn't found by regex but seems ok
+    cleaned_text = text_no_html.strip()
+    if not potential_urls and '.' in cleaned_text:
+         potential_urls.append(cleaned_text)
+
+    return [url.strip() for url in potential_urls if url]
+
 def extract_domain_or_ip(tracker_entry):
-    """Extracts domain (no port) or IP address from a tracker entry. V6 Logic"""
+    # ... (same as V7) ...
     domain = None
     ip = None
     original_entry = tracker_entry
     detail_logger.debug(f"开始处理条目: {original_entry}")
 
     try:
-        # 1. Add default scheme if missing
         if not re.match(r"^\w+://", tracker_entry):
              temp_netloc_guess = tracker_entry.split('/', 1)[0]
              if '.' in temp_netloc_guess or ':' in temp_netloc_guess or (temp_netloc_guess.startswith('[') and temp_netloc_guess.endswith(']')):
@@ -220,7 +236,6 @@ def extract_domain_or_ip(tracker_entry):
 
         detail_logger.debug(f"urlparse 提取 Hostname: '{hostname_from_parse}'")
 
-        # 2. Clean implicit ports
         cleaned_hostname = hostname_from_parse
         implicit_port_match = re.match(r'^(.*\.[a-zA-Z]{2,})(\d{2,5})$', hostname_from_parse)
         if implicit_port_match:
@@ -232,31 +247,28 @@ def extract_domain_or_ip(tracker_entry):
             else:
                  detail_logger.warning(f"找到类似隐式端口的数字 '{potential_port}' 但前面的 '{potential_domain}' 不是有效域名结构。保留原样: '{hostname_from_parse}'")
 
-        # 3. Prioritize IP identification
         try:
             ip_addr = ipaddress.ip_address(cleaned_hostname)
             ip = str(ip_addr)
             detail_logger.debug(f"识别为 IP: {ip} (来自: {original_entry})")
             domain = None
         except ValueError:
-            # 4. If not IP, treat as domain
             domain_candidate = cleaned_hostname
             if re.match(r"^(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$", domain_candidate):
                 try:
-                    # Use tldextract for final validation
                     ext = tldextract.extract(domain_candidate)
                     if ext.suffix and ext.domain:
                         domain = domain_candidate
                         detail_logger.debug(f"识别为有效域名: {domain} (来自: {original_entry})")
                     else:
-                        detail_logger.warning(f"tldextract 无法验证域名/后缀: '{domain_candidate}' (来自: {original_entry}), 已丢弃")
-                        domain = None
+                         detail_logger.warning(f"tldextract 无法验证域名/后缀: '{domain_candidate}' (来自: {original_entry}), 已丢弃")
+                         domain = None
                 except Exception as tld_e:
                      detail_logger.error(f"tldextract 在验证 '{domain_candidate}' 时出错: {tld_e}. 已丢弃.")
                      domain = None
             else:
-                 detail_logger.warning(f"清理后的主机名 '{domain_candidate}' 不符合基本域名结构 (来自: {original_entry})")
-                 domain = None
+                detail_logger.warning(f"清理后的主机名 '{domain_candidate}' 不符合基本域名结构 (来自: {original_entry})")
+                domain = None
 
     except Exception as e:
         detail_logger.error(f"解析条目时发生严重错误 '{original_entry}': {e}", exc_info=True)
@@ -264,63 +276,77 @@ def extract_domain_or_ip(tracker_entry):
     return domain, ip
 
 def read_existing_items(filepath):
-    """Reads existing items (one per line) from a txt file."""
-    items = set()
-    if not os.path.exists(filepath):
-        detail_logger.info(f"文件不存在，将创建新文件: {filepath}")
-        return items
-    try:
-        with open(filepath, "r", encoding='utf-8') as f:
-            for line in f:
-                item = line.strip()
-                if item: # Ensure not adding empty lines from the file
-                    items.add(item)
-        detail_logger.info(f"从 {filepath} 读取了 {len(items)} 个现有条目")
-    except Exception as e:
-        detail_logger.error(f"读取文件 {filepath} 失败: {e}")
-    return items
+    # ... (same as V7) ...
+     items = set()
+     if not os.path.exists(filepath):
+         detail_logger.info(f"文件不存在，将创建新文件: {filepath}")
+         return items
+     try:
+         with open(filepath, "r", encoding='utf-8') as f:
+             for line in f:
+                 item = line.strip()
+                 if item:
+                     items.add(item)
+         detail_logger.info(f"从 {filepath} 读取了 {len(items)} 个现有条目")
+     except Exception as e:
+         detail_logger.error(f"读取文件 {filepath} 失败: {e}")
+     return items
 
+# --- V8: Revised append_items_to_txt ---
 def append_items_to_txt(filepath, items_to_add):
-    """Appends new items (one per line) to a txt file, avoiding initial blank line."""
+    """Appends new items (one per line) to a txt file, avoiding extra blank lines."""
     if not items_to_add:
         detail_logger.info(f"没有新条目需要追加到 {filepath}")
         return
     try:
         os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
-        # Check if file exists and is non-empty to decide if prefix newline is needed
-        needs_newline_prefix = os.path.exists(filepath) and os.path.getsize(filepath) > 0
+
+        prefix_newline = False
+        if os.path.exists(filepath) and os.path.getsize(filepath) > 0:
+            # Check the very last character of the file
+            with open(filepath, 'rb') as f: # Open in binary to read last byte
+                try:
+                    f.seek(-1, os.SEEK_END)
+                    last_char = f.read(1)
+                    if last_char != b'\n':
+                        prefix_newline = True # Need a newline if last char wasn't one
+                except OSError: # Handle empty file case after check
+                    pass # Empty file, no prefix needed
+        elif not os.path.exists(filepath):
+            pass # New file, no prefix needed
 
         with open(filepath, "a", encoding='utf-8') as f:
-            prefix = "\n" if needs_newline_prefix else ""
-            # Write items, each followed by a newline
-            content_to_append = prefix + "\n".join(sorted(list(items_to_add)))
-            f.write(content_to_append + "\n") # Ensure final newline
+            content_to_write = ""
+            if prefix_newline:
+                content_to_write += "\n"
+            # Join new items with newline, ensure the entire block ends with one newline
+            content_to_write += "\n".join(sorted(list(items_to_add))) + "\n"
+            f.write(content_to_write)
 
         detail_logger.info(f"向 {filepath} 增量添加了 {len(items_to_add)} 个条目")
     except IOError as e:
         detail_logger.error(f"追加写入文件 {filepath} 失败: {e}")
 
 def write_json_like_file(filepath, all_items):
-    """Writes items to a file mimicking the specified JSON-like format."""
-    # ... (same as V6) ...
-    lines = []
-    for item in sorted(list(all_items)):
-        lines.append(f'\t\t    "{item}",')
-    content = "\n".join(lines)
-    try:
-        os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
-        with open(filepath, "w", encoding='utf-8') as f:
-            f.write(content)
-        detail_logger.info(f"成功覆盖写入 {filepath} (包含 {len(all_items)} 条目)")
-    except IOError as e:
-        detail_logger.error(f"覆盖写入文件 {filepath} 失败: {e}")
+    # ... (same as V7) ...
+     lines = []
+     for item in sorted(list(all_items)):
+         lines.append(f'\t\t    "{item}",')
+     content = "\n".join(lines)
+     try:
+         os.makedirs(os.path.dirname(filepath) or '.', exist_ok=True)
+         with open(filepath, "w", encoding='utf-8') as f:
+             f.write(content)
+         detail_logger.info(f"成功覆盖写入 {filepath} (包含 {len(all_items)} 条目)")
+     except IOError as e:
+         detail_logger.error(f"覆盖写入文件 {filepath} 失败: {e}")
 
 def write_summary_log(data, added_domains, added_ips):
-    """Writes summary to logall.txt and prepends it to log.txt."""
+    """Writes summary to logall.txt and prepends it to log.txt (reverse chronological)."""
+    # ... (Formatting and logging to logall.txt remains the same as V7) ...
     duration_td = datetime.timedelta(seconds=data['duration_seconds'])
     duration_str = str(duration_td).split('.')[0]
 
-    # Format added items list (limit displayed items)
     max_items_to_show = 5
     added_domains_str = ", ".join(list(added_domains)[:max_items_to_show])
     if len(added_domains) > max_items_to_show:
@@ -338,26 +364,29 @@ def write_summary_log(data, added_domains, added_ips):
   新增域名: [{added_domains_str if added_domains else '无'}]
 提取的唯一 IP 地址数 (本次): {data['new_ips_count']} (总计: {data['total_ips']})
   新增 IP: [{added_ips_str if added_ips else '无'}]
--------------------------------------""" # Removed extra newline at the end
+-------------------------------------"""
 
     # Log summary to detailed log (logall.txt)
     detail_logger.info("--- 运行总结 ---")
     for line in summary_block.strip().splitlines():
         detail_logger.info(line)
 
-    # Prepend summary to summary log (log.txt)
+    # --- V7 Change: Prepend summary to summary log (log.txt) ---
     try:
         os.makedirs(os.path.dirname(LOG_SUMMARY_FILE) or '.', exist_ok=True)
         existing_log_content = ""
         if os.path.exists(LOG_SUMMARY_FILE):
-            with open(LOG_SUMMARY_FILE, "r", encoding='utf-8') as f_read:
-                existing_log_content = f_read.read()
+            try:
+                with open(LOG_SUMMARY_FILE, "r", encoding='utf-8') as f_read:
+                    existing_log_content = f_read.read()
+            except Exception as read_err:
+                 detail_logger.error(f"读取现有总结日志 {LOG_SUMMARY_FILE} 失败: {read_err}")
 
+        # Write new content (New summary + separator + old content)
         with open(LOG_SUMMARY_FILE, "w", encoding='utf-8') as f_write:
-            f_write.write(summary_block.strip() + "\n\n") # Add separator after new block
+            f_write.write(summary_block.strip() + "\n\n") # Ensures separation
             f_write.write(existing_log_content)
 
-        # Using summary_logger just to indicate the action, actual IO is manual
         summary_logger.info("写入运行总结到 " + LOG_SUMMARY_FILE + " (最新在顶部)")
 
     except IOError as e:
@@ -366,6 +395,7 @@ def write_summary_log(data, added_domains, added_ips):
 
 # --- Main Execution ---
 def main():
+    # ... (same as V7) ...
     detail_logger.info("脚本开始运行")
     start_time = time.time()
 
@@ -403,16 +433,12 @@ def main():
     detail_logger.info(f"发现 {len(added_domains)} 个新域名")
     detail_logger.info(f"发现 {len(added_ips)} 个新 IP 地址")
 
-    # --- V7 Fix START: Pass added sets to summary before potentially altering them ---
-    # Calculate final sets *before* writing summary, as summary needs added_* sets
     all_final_domains = existing_domains.union(added_domains)
     all_final_ips = existing_ips.union(added_ips)
-    # --- V7 Fix END ---
 
     append_items_to_txt(SITE_TXT_FILE, added_domains)
     append_items_to_txt(IP_TXT_FILE, added_ips)
 
-    # Write JSON files with the total combined set
     write_json_like_file(SITE_JSON_FILE, all_final_domains)
     write_json_like_file(IP_JSON_FILE, all_final_ips)
 
@@ -429,7 +455,6 @@ def main():
         'new_ips_count': len(added_ips),
         'total_ips': len(all_final_ips),
     }
-    # Pass the actual added sets to the summary function
     write_summary_log(summary_data, added_domains, added_ips)
 
     detail_logger.info("脚本运行成功结束")
