@@ -1117,3 +1117,5 @@ zer0day.to
 share.dmhy.org
 t-115.rhcloud.com
 t2.popgo.org
+tracker.ducks.party
+tracker.trackarr.org
