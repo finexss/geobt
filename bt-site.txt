@@ -1119,3 +1119,4 @@ t-115.rhcloud.com
 t2.popgo.org
 tracker.ducks.party
 tracker.trackarr.org
+tracker.tritan.gg
