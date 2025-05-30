@@ -1172,3 +1172,5 @@ tracker9.bol.bg
 www.proxmox.com
 xxxtor.com
 tracker.bitcoinindia.space
+tracker.hifimarket.in
+tracker.hifitechindia.com
