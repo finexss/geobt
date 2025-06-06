@@ -1174,3 +1174,5 @@ xxxtor.com
 tracker.bitcoinindia.space
 tracker.hifimarket.in
 tracker.hifitechindia.com
+joczo.duckdns.org
+tracker.plx.im
