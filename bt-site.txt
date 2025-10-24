@@ -1211,3 +1211,5 @@ tracker.belmult.online
 t.al.uy
 t-backup.213891.xyz
 tracker.chaoz.li
+cny.fan
+tracker.1h.is
