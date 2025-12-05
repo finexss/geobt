@@ -1217,3 +1217,4 @@ yggtracker.i2p.rocks
 tracker.playground.ru
 bittracker.nekosunevr.co.uk
 tracker.iochimari.moe
+tracker.flatuslifir.is
