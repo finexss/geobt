@@ -1218,3 +1218,6 @@ tracker.playground.ru
 bittracker.nekosunevr.co.uk
 tracker.iochimari.moe
 tracker.flatuslifir.is
+laestrygonian.ooguy.com
+play.aimisayo.com
+tracker.x6c.co
