@@ -1221,3 +1221,10 @@ tracker.flatuslifir.is
 laestrygonian.ooguy.com
 play.aimisayo.com
 tracker.x6c.co
+edge-team.cc
+lotus-eater.mywire.org
+node01.torrentonline.cc
+node01.trackerstatus.live
+node02.torrentonline.cc
+torrentonline.cc
+tracker.opentorrent.top
