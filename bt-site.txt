@@ -1228,3 +1228,6 @@ node01.trackerstatus.live
 node02.torrentonline.cc
 torrentonline.cc
 tracker.opentorrent.top
+kingof.torrentonline.cc
+node01.edge-team.cc
+node01.madtia.cc
