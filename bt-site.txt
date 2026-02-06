@@ -1243,3 +1243,5 @@ tracker.orsvarn.com
 tracker.maya.no.eu.org
 litter.fluffykitten.moe
 opentracker.co
+tracker.sharebro.in
+tracker.umunu.ru
