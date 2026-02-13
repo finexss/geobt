@@ -1245,3 +1245,5 @@ litter.fluffykitten.moe
 opentracker.co
 tracker.sharebro.in
 tracker.umunu.ru
+onioniot.tk
+tracker.manager.v6.navy
