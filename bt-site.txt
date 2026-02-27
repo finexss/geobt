@@ -1260,3 +1260,5 @@ tracker.qingwapt.org
 tracker.riverarmy.xyz
 tracker.torrentbd.net
 uabits.today
+bittorrent.kali.org
+node02.madtia.cc
