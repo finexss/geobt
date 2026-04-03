@@ -1287,3 +1287,6 @@ bughome.de
 tracker.7471.top
 tracker.mrhei.tech
 vps-c1adea63.vps.ovh.net
+66691337.xyz
+tracker.nyaa.vc
+tracker.wildkat.net
