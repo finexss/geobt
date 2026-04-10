@@ -1290,3 +1290,15 @@ vps-c1adea63.vps.ovh.net
 66691337.xyz
 tracker.nyaa.vc
 tracker.wildkat.net
+bt.publicvm.com
+bt.t-ru.org
+bt4.t-ru.org
+coeus.torrentonline.cc
+sound-park.world
+torrents.tmtime.dev
+tracker.hismz.cn
+tracker.port443.xyz
+tracker.ptrmc.net
+tracker.supertracker.net
+wtorrent.manalejandro.com
+yuptracker-eu.gaijinent.com
