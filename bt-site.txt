@@ -1302,3 +1302,9 @@ tracker.ptrmc.net
 tracker.supertracker.net
 wtorrent.manalejandro.com
 yuptracker-eu.gaijinent.com
+archive.torrentonline.cc
+obey.torrentonline.cc
+open.ftorrent.com
+trackthis.cyber.pz.it
+vito-tracker.duckdns.org
+whybother.torrentonline.cc
