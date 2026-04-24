@@ -1308,3 +1308,6 @@ open.ftorrent.com
 trackthis.cyber.pz.it
 vito-tracker.duckdns.org
 whybother.torrentonline.cc
+siwserver.duckdns.org
+torrent.bowed.net
+tracker.moviesdb.top
