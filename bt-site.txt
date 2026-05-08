@@ -1312,3 +1312,8 @@ siwserver.duckdns.org
 torrent.bowed.net
 tracker.moviesdb.top
 vito-tracker.space
+cerf.cs.umd.edu
+t.warwarez.ru
+tracker.lenition.de
+tracker.samcze.pl
+tracker.torrentclaw.com
