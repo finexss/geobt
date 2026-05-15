@@ -1317,3 +1317,5 @@ t.warwarez.ru
 tracker.lenition.de
 tracker.samcze.pl
 tracker.torrentclaw.com
+tr.btube3.com
+udp.trackarr.org
