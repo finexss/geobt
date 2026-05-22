@@ -1319,3 +1319,6 @@ tracker.samcze.pl
 tracker.torrentclaw.com
 tr.btube3.com
 udp.trackarr.org
+anime-tracker.aruku.kro.kr
+tracker.aruku.ovh
+v6.vito-tracker.space
