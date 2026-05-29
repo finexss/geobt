@@ -1322,3 +1322,4 @@ udp.trackarr.org
 anime-tracker.aruku.kro.kr
 tracker.aruku.ovh
 v6.vito-tracker.space
+tracker.anibt.net
