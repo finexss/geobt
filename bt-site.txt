@@ -1323,3 +1323,8 @@ anime-tracker.aruku.kro.kr
 tracker.aruku.ovh
 v6.vito-tracker.space
 tracker.anibt.net
+021912.xyz
+announce.sktorrent.eu
+banananetwork.qzz.io
+orgtgju.org
+tracker.manager.itislove.cz
