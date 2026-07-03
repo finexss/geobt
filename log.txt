@@ -1,3 +1,13 @@
+--- 运行总结 (2026-07-03 02:00:54) ---
+总耗时: 0:00:27
+处理的 URL 数量: 42
+收集的原始条目数: 13247 (4093 unique)
+提取的唯一域名数 (本次): 6 (总计: 1344)
+  新增域名: [tracker.isbigdick.cc.cd, yuptracker.gaijinent.com, yuptracker-us.gaijinent.com, staticfile-bobcat.wasmer.app, yuptracker-sa.gaijinent.com, ...]
+提取的唯一 IP 地址数 (本次): 0 (总计: 1038)
+  新增 IP: [无]
+-------------------------------------
+
 --- 运行总结 (2026-06-26 02:29:58) ---
 总耗时: 0:00:26
 处理的 URL 数量: 42
