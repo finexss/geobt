@@ -1342,3 +1342,8 @@ tracker.isbigdick.cc.cd
 yuptracker-sa.gaijinent.com
 yuptracker-us.gaijinent.com
 yuptracker.gaijinent.com
+docs.github.com
+ds32244.seedhost.eu
+maxsrv.xyz
+php-bobcat.wasmer.app
+tracker.nexusstream.eu
