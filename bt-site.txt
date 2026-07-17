@@ -1347,3 +1347,5 @@ ds32244.seedhost.eu
 maxsrv.xyz
 php-bobcat.wasmer.app
 tracker.nexusstream.eu
+supertracker.cc.cd
+tracker.adgk.net
