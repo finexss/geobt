@@ -1351,3 +1351,4 @@ supertracker.cc.cd
 tracker.adgk.net
 edgev.duckdns.org
 ydlkccp.dscloud.me
+tracker.nyaa.net
