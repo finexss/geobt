@@ -1352,3 +1352,4 @@ tracker.adgk.net
 edgev.duckdns.org
 ydlkccp.dscloud.me
 tracker.nyaa.net
+tracker.cn.nyaa.net
