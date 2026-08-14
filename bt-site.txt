@@ -1353,3 +1353,5 @@ edgev.duckdns.org
 ydlkccp.dscloud.me
 tracker.nyaa.net
 tracker.cn.nyaa.net
+tracker.cynma.tv
+udp.tracker.linvk.com
