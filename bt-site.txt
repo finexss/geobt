@@ -1355,3 +1355,6 @@ tracker.nyaa.net
 tracker.cn.nyaa.net
 tracker.cynma.tv
 udp.tracker.linvk.com
+tracker.govt.hu
+tracker.onetracker.net
+tracker4.finalgear.com
