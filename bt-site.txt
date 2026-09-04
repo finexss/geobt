@@ -1358,3 +1358,4 @@ udp.tracker.linvk.com
 tracker.govt.hu
 tracker.onetracker.net
 tracker4.finalgear.com
+udp-tracker.adgk.net
