@@ -1359,3 +1359,5 @@ tracker.govt.hu
 tracker.onetracker.net
 tracker4.finalgear.com
 udp-tracker.adgk.net
+5.tracker.eu.org
+tracker.digital-alpha-world.de
