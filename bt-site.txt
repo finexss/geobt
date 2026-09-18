@@ -1361,3 +1361,5 @@ tracker4.finalgear.com
 udp-tracker.adgk.net
 5.tracker.eu.org
 tracker.digital-alpha-world.de
+opentracker.lain.moscow
+tracker.torrents.observer
