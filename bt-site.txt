@@ -1363,3 +1363,6 @@ udp-tracker.adgk.net
 tracker.digital-alpha-world.de
 opentracker.lain.moscow
 tracker.torrents.observer
+kolankoalastree.newtrackon.co.nz
+kolanopentracker.airdns.org
+tracker.willy.pro

@@ -1,194 +1,194 @@
-2026-09-18 02:14:11,543 - INFO - 脚本开始运行
-2026-09-18 02:14:11,544 - INFO - 解析得到 42 个 tracker URLs
-2026-09-18 02:14:11,544 - INFO - 从 bt-site.txt 读取了 1363 个现有条目
-2026-09-18 02:14:11,544 - INFO - 从 bt-ip.txt 读取了 1075 个现有条目
-2026-09-18 02:14:11,544 - INFO - 开始下载: https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
-2026-09-18 02:14:32,067 - ERROR - 下载超时: https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
-2026-09-18 02:14:32,067 - INFO - 从 https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7 提取了 0 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:32,067 - INFO - 开始下载: https://www.gbsat.org/bt/tracker.txt
-2026-09-18 02:14:32,481 - INFO - 下载成功: https://www.gbsat.org/bt/tracker.txt (状态码: 200, 类型: text/plain)
-2026-09-18 02:14:32,482 - INFO - 从 https://www.gbsat.org/bt/tracker.txt 提取了 216 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:32,483 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/all.txt
-2026-09-18 02:14:32,834 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:32,835 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/all.txt 提取了 125 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:32,836 - INFO - 开始下载: https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt
-2026-09-18 02:14:33,011 - INFO - 下载成功: https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:33,015 - INFO - 从 https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt 提取了 1542 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:33,016 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt
-2026-09-18 02:14:33,384 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:33,385 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt 提取了 125 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:33,386 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/best.txt
-2026-09-18 02:14:33,636 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:33,636 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/best.txt 提取了 73 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:33,638 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt
-2026-09-18 02:14:34,021 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:34,021 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt 提取了 73 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:34,023 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt
-2026-09-18 02:14:34,422 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:34,422 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:34,423 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/http.txt
-2026-09-18 02:14:34,760 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:34,761 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/http.txt 提取了 54 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:34,762 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt
-2026-09-18 02:14:35,134 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:35,135 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt 提取了 54 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:35,136 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt
-2026-09-18 02:14:35,469 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:35,470 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt 提取了 70 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:35,471 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt
-2026-09-18 02:14:35,830 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:35,830 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt 提取了 70 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:35,832 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/other.txt
-2026-09-18 02:14:36,184 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/other.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:36,184 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/other.txt 提取了 13 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:36,186 - INFO - 开始下载: https://cf.trackerslist.com/all.txt
-2026-09-18 02:14:36,440 - INFO - 下载成功: https://cf.trackerslist.com/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:36,441 - INFO - 从 https://cf.trackerslist.com/all.txt 提取了 125 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:36,442 - INFO - 开始下载: https://cf.trackerslist.com/best.txt
-2026-09-18 02:14:36,533 - INFO - 下载成功: https://cf.trackerslist.com/best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:36,533 - INFO - 从 https://cf.trackerslist.com/best.txt 提取了 73 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:36,534 - INFO - 开始下载: https://cf.trackerslist.com/http.txt
-2026-09-18 02:14:36,654 - INFO - 下载成功: https://cf.trackerslist.com/http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:36,654 - INFO - 从 https://cf.trackerslist.com/http.txt 提取了 54 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:36,655 - INFO - 开始下载: https://cf.trackerslist.com/nohttp.txt
-2026-09-18 02:14:36,786 - INFO - 下载成功: https://cf.trackerslist.com/nohttp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:36,786 - INFO - 从 https://cf.trackerslist.com/nohttp.txt 提取了 70 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:36,787 - INFO - 开始下载: https://github.com/ngosang/trackerslist/raw/master/blacklist.txt
-2026-09-18 02:14:37,132 - INFO - 下载成功: https://github.com/ngosang/trackerslist/raw/master/blacklist.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,133 - INFO - 从 https://github.com/ngosang/trackerslist/raw/master/blacklist.txt 提取了 390 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,135 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt
-2026-09-18 02:14:37,199 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,200 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,201 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt
-2026-09-18 02:14:37,260 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,260 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt 提取了 79 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,261 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt
-2026-09-18 02:14:37,388 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,388 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt 提取了 47 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,389 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt
-2026-09-18 02:14:37,501 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,501 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt 提取了 19 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,502 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt
-2026-09-18 02:14:37,609 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,610 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt 提取了 13 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,610 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt
-2026-09-18 02:14:37,714 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,714 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt 提取了 3 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,715 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt
-2026-09-18 02:14:37,778 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,778 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,779 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
-2026-09-18 02:14:37,911 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:37,911 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt 提取了 57 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:37,912 - INFO - 开始下载: https://newtrackon.com/api/all
-2026-09-18 02:14:38,181 - INFO - 下载成功: https://newtrackon.com/api/all (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:38,182 - WARNING - URL https://newtrackon.com/api/all 检测到 JSON 类型但解析失败，将尝试文本分割。
-2026-09-18 02:14:38,182 - INFO - 从 https://newtrackon.com/api/all 提取了 257 个唯一有效条目 (JSON尝试: True)
-2026-09-18 02:14:38,183 - INFO - 开始下载: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt
-2026-09-18 02:14:38,293 - ERROR - 下载失败: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt - 404 Client Error: Not Found for url: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt
-2026-09-18 02:14:38,293 - INFO - 从 https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:38,294 - INFO - 开始下载: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt
-2026-09-18 02:14:38,503 - INFO - 下载成功: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:38,510 - INFO - 从 https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt 提取了 3524 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:38,511 - INFO - 开始下载: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt
-2026-09-18 02:14:38,731 - INFO - 下载成功: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:38,732 - INFO - 从 https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt 提取了 335 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:38,733 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt
-2026-09-18 02:14:38,902 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:38,904 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt 提取了 552 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:38,904 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt
-2026-09-18 02:14:39,054 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:39,056 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt 提取了 856 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:39,056 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt
-2026-09-18 02:14:39,219 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:39,221 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt 提取了 451 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:39,221 - INFO - 开始下载: https://trackerslist.com/all.txt
-2026-09-18 02:14:39,389 - INFO - 下载成功: https://trackerslist.com/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:39,390 - INFO - 从 https://trackerslist.com/all.txt 提取了 125 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:39,390 - INFO - 开始下载: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt
-2026-09-18 02:14:39,438 - INFO - 下载成功: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:39,440 - INFO - 从 https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt 提取了 1091 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:39,441 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
-2026-09-18 02:14:39,501 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:39,501 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt 提取了 57 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:39,502 - INFO - 开始下载: https://github.com/user-attachments/files/17001768/trackerlist.txt
-2026-09-18 02:14:39,995 - INFO - 下载成功: https://github.com/user-attachments/files/17001768/trackerlist.txt (状态码: 200, 类型: text/plain)
-2026-09-18 02:14:40,009 - INFO - 从 https://github.com/user-attachments/files/17001768/trackerlist.txt 提取了 1510 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:40,011 - INFO - 开始下载: https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
-2026-09-18 02:14:40,411 - INFO - 下载成功: https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt (状态码: 200, 类型: text/plain)
-2026-09-18 02:14:40,416 - INFO - 从 https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt 提取了 1011 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:40,418 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt
-2026-09-18 02:14:41,530 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/best.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
-2026-09-18 02:14:41,530 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:41,530 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt
-2026-09-18 02:14:42,177 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/all.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
-2026-09-18 02:14:42,177 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:42,177 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt
-2026-09-18 02:14:42,420 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/http.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
-2026-09-18 02:14:42,420 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:42,420 - INFO - 开始下载: https://trackers.run/s/wp_up_hp_hs_v4_v6.txt
-2026-09-18 02:14:42,917 - INFO - 下载成功: https://trackers.run/s/wp_up_hp_hs_v4_v6.txt (状态码: 200, 类型: text/plain; charset=utf-8)
-2026-09-18 02:14:42,917 - INFO - 从 https://trackers.run/s/wp_up_hp_hs_v4_v6.txt 提取了 51 个唯一有效条目 (JSON尝试: False)
-2026-09-18 02:14:42,919 - INFO - 总共收集到 13225 个原始条目，去重后 4192 个唯一原始条目
-2026-09-18 02:14:43,106 - WARNING - 清理后的主机名 'yet-another-public-tracker.i2p' 不符合基本域名结构 (来自: http://yet-another-public-tracker.i2p/announce)
-2026-09-18 02:14:43,107 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.dmhy.org00'. 使用: 'tracker.dmhy.org' (来自: http://tracker.dmhy.org00/announce)
-2026-09-18 02:14:43,108 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.merded.xyz00'. 使用: 'tracker.merded.xyz' (来自: http://tracker.merded.xyz00/announce)
-2026-09-18 02:14:43,109 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker1.itzmx.com80'. 使用: 'tracker1.itzmx.com' (来自: http://tracker1.itzmx.com80/announce)
-2026-09-18 02:14:43,110 - WARNING - 清理后的主机名 'opentracker.dg2.i2p' 不符合基本域名结构 (来自: http://opentracker.dg2.i2p:80/a)
-2026-09-18 02:14:43,111 - WARNING - 清理后的主机名 '4olv65sj4ifeak26wqiifr3q2vjv5d44x733ncqhtd7cmjwoinpa.b32.i2p' 不符合基本域名结构 (来自: http://4olv65sj4ifeak26wqiifr3q2vjv5d44x733ncqhtd7cmjwoinpa.b32.i2p/announce)
-2026-09-18 02:14:43,112 - INFO - 检测到并移除隐式端口 '80' from hostname 'bt2.54new.com80'. 使用: 'bt2.54new.com' (来自: http://bt2.54new.com80/announce)
-2026-09-18 02:14:43,113 - INFO - 检测到并移除隐式端口 '00' from hostname 'frp.v2fy.com00'. 使用: 'frp.v2fy.com' (来自: http://frp.v2fy.com00/announce)
-2026-09-18 02:14:43,134 - INFO - 检测到并移除隐式端口 '00' from hostname 'bt.ali213.net00'. 使用: 'bt.ali213.net' (来自: http://bt.ali213.net00/announce)
-2026-09-18 02:14:43,135 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.ali213.net80'. 使用: 'tracker.ali213.net' (来自: http://tracker.ali213.net80/announce)
-2026-09-18 02:14:43,135 - INFO - 检测到并移除隐式端口 '00' from hostname 'jsb.by00'. 使用: 'jsb.by' (来自: http://jsb.by00/announce)
-2026-09-18 02:14:43,135 - WARNING - 清理后的主机名 'nyaaplus.i2p' 不符合基本域名结构 (来自: http://nyaaplus.i2p:80/announce)
-2026-09-18 02:14:43,141 - WARNING - 检测到嵌套协议，尝试提取内部 URL: 'udp://http://www.peckservers.com:9000/announce'
-2026-09-18 02:14:43,144 - INFO - 检测到并移除隐式端口 '70' from hostname 'tr.cili001.com70'. 使用: 'tr.cili001.com' (来自: http://tr.cili001.com70/announce)
-2026-09-18 02:14:43,144 - INFO - 检测到并移除隐式端口 '80' from hostname 'bt.ali213.net80'. 使用: 'bt.ali213.net' (来自: http://bt.ali213.net80/announce)
-2026-09-18 02:14:43,147 - WARNING - 清理后的主机名 'tracker.nyaa2p.i2p' 不符合基本域名结构 (来自: http://tracker.nyaa2p.i2p/announce)
-2026-09-18 02:14:43,147 - INFO - 检测到并移除隐式端口 '80' from hostname 'www.chouchou.club80'. 使用: 'www.chouchou.club' (来自: http://www.chouchou.club80/announce)
-2026-09-18 02:14:43,147 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.minglong.org80'. 使用: 'tracker.minglong.org' (来自: http://tracker.minglong.org80/announce)
-2026-09-18 02:14:43,148 - INFO - 检测到并移除隐式端口 '80' from hostname 'www.loushao.net80'. 使用: 'www.loushao.net' (来自: http://www.loushao.net80/announce)
-2026-09-18 02:14:43,151 - WARNING - 清理后的主机名 'freetracker.i2p' 不符合基本域名结构 (来自: http://freetracker.i2p:7331/announce)
-2026-09-18 02:14:43,152 - WARNING - 清理后的主机名 'tracker2.postman.i2p' 不符合基本域名结构 (来自: http://tracker2.postman.i2p/announce.php)
-2026-09-18 02:14:43,153 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.ali213.net00'. 使用: 'tracker.ali213.net' (来自: http://tracker.ali213.net00/announce)
-2026-09-18 02:14:43,153 - WARNING - 清理后的主机名 'opentracker.fattydove.i2p' 不符合基本域名结构 (来自: http://opentracker.fattydove.i2p:80/a)
-2026-09-18 02:14:43,154 - INFO - 检测到并移除隐式端口 '80' from hostname 'share.camoe.cn80'. 使用: 'share.camoe.cn' (来自: http://share.camoe.cn80/announce)
-2026-09-18 02:14:43,155 - WARNING - 清理后的主机名 'tracker.insulaocculta.i2p' 不符合基本域名结构 (来自: http://tracker.insulaocculta.i2p/a)
-2026-09-18 02:14:43,155 - WARNING - 清理后的主机名 'opentracker.eeptorrent.i2p' 不符合基本域名结构 (来自: http://opentracker.eeptorrent.i2p:80/a)
-2026-09-18 02:14:43,160 - INFO - 检测到并移除隐式端口 '80' from hostname 'torrentsmd.com80'. 使用: 'torrentsmd.com' (来自: http://torrentsmd.com80/announce)
-2026-09-18 02:14:43,166 - WARNING - 清理后的主机名 'opentracker.simp.i2p' 不符合基本域名结构 (来自: http://opentracker.simp.i2p:80/a)
-2026-09-18 02:14:43,167 - WARNING - 清理后的主机名 'qimlze77z7w32lx2ntnwkuqslrzlsqy7774v3urueuarafyqik5a.b32.i2p' 不符合基本域名结构 (来自: http://qimlze77z7w32lx2ntnwkuqslrzlsqy7774v3urueuarafyqik5a.b32.i2p:80/a)
-2026-09-18 02:14:43,168 - WARNING - 清理后的主机名 'opentracker.r4sas.i2p' 不符合基本域名结构 (来自: http://opentracker.r4sas.i2p:80/a)
-2026-09-18 02:14:43,170 - WARNING - 清理后的主机名 'nyaaplus.i2p' 不符合基本域名结构 (来自: http://nyaaplus.i2p/announce)
-2026-09-18 02:14:43,174 - WARNING - 清理后的主机名 'opentracker.simp.i2p' 不符合基本域名结构 (来自: udp://opentracker.simp.i2p:6969/a)
-2026-09-18 02:14:43,175 - WARNING - 清理后的主机名 'freetracker.i2p' 不符合基本域名结构 (来自: udp://freetracker.i2p:1337/announce)
-2026-09-18 02:14:43,176 - INFO - 检测到并移除隐式端口 '80' from hostname 'montreal.nyap2p.com80'. 使用: 'montreal.nyap2p.com' (来自: http://montreal.nyap2p.com80/announce)
-2026-09-18 02:14:43,177 - WARNING - 清理后的主机名 '6wbrmd4wodeewdykfw362gmlbeo26njc5zmtuxdvtomehpozzjja.b32.i2p' 不符合基本域名结构 (来自: http://6wbrmd4wodeewdykfw362gmlbeo26njc5zmtuxdvtomehpozzjja.b32.i2p/announce)
-2026-09-18 02:14:43,177 - WARNING - 清理后的主机名 'btrackrqkjp6kgelov5a3uxisis77ofxqt5nvy5hvvtoybjpmq4q.b32.i2p' 不符合基本域名结构 (来自: http://btrackrqkjp6kgelov5a3uxisis77ofxqt5nvy5hvvtoybjpmq4q.b32.i2p/announce)
-2026-09-18 02:14:43,178 - WARNING - 清理后的主机名 'tracker.nyaa2p.i2p' 不符合基本域名结构 (来自: http://tracker.nyaa2p.i2p:80/announce)
-2026-09-18 02:14:43,184 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker3.ctix.cn80'. 使用: 'tracker3.ctix.cn' (来自: http://tracker3.ctix.cn80/announce)
-2026-09-18 02:14:43,184 - WARNING - 清理后的主机名 'sigmatracker.i2p' 不符合基本域名结构 (来自: http://sigmatracker.i2p:80/a)
-2026-09-18 02:14:43,185 - WARNING - 清理后的主机名 'opentracker.skank.i2p' 不符合基本域名结构 (来自: udp://opentracker.skank.i2p:6969/a)
-2026-09-18 02:14:43,186 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.renfei.net80'. 使用: 'tracker.renfei.net' (来自: http://tracker.renfei.net80/announce)
-2026-09-18 02:14:43,186 - WARNING - 清理后的主机名 'opentracker.skank.i2p' 不符合基本域名结构 (来自: http://opentracker.skank.i2p:80/a)
-2026-09-18 02:14:43,188 - INFO - 检测到并移除隐式端口 '00' from hostname 'laxclax.ddns.net00'. 使用: 'laxclax.ddns.net' (来自: http://laxclax.ddns.net00/announce)
-2026-09-18 02:14:43,193 - INFO - 处理完成 4192 个唯一原始条目
-2026-09-18 02:14:43,193 - INFO - 本次运行提取到 1365 个唯一域名和 1075 个唯一 IP 地址
-2026-09-18 02:14:43,193 - INFO - 发现 2 个新域名
-2026-09-18 02:14:43,193 - INFO - 发现 8 个新 IP 地址
-2026-09-18 02:14:43,193 - INFO - 向 bt-site.txt 增量添加了 2 个条目
-2026-09-18 02:14:43,193 - INFO - 向 bt-ip.txt 增量添加了 8 个条目
-2026-09-18 02:14:43,194 - INFO - 成功覆盖写入 bt-site.json (包含 1365 条目)
-2026-09-18 02:14:43,194 - INFO - 成功覆盖写入 bt-ip.json (包含 1083 条目)
-2026-09-18 02:14:43,194 - INFO - --- 运行总结 ---
-2026-09-18 02:14:43,194 - INFO - --- 运行总结 (2026-09-18 02:14:43) ---
-2026-09-18 02:14:43,194 - INFO - 总耗时: 0:00:31
-2026-09-18 02:14:43,194 - INFO - 处理的 URL 数量: 42
-2026-09-18 02:14:43,194 - INFO - 收集的原始条目数: 13225 (4192 unique)
-2026-09-18 02:14:43,194 - INFO - 提取的唯一域名数 (本次): 2 (总计: 1365)
-2026-09-18 02:14:43,194 - INFO -   新增域名: [tracker.torrents.observer, opentracker.lain.moscow]
-2026-09-18 02:14:43,194 - INFO - 提取的唯一 IP 地址数 (本次): 8 (总计: 1083)
-2026-09-18 02:14:43,194 - INFO -   新增 IP: [31.59.141.120, 47.76.201.250, 38.180.157.12, 90.226.147.124, 178.239.19.29, ...]
-2026-09-18 02:14:43,195 - INFO - -------------------------------------
-2026-09-18 02:14:43,195 - INFO - 脚本运行成功结束
+2026-09-25 02:33:07,890 - INFO - 脚本开始运行
+2026-09-25 02:33:07,890 - INFO - 解析得到 42 个 tracker URLs
+2026-09-25 02:33:07,891 - INFO - 从 bt-site.txt 读取了 1365 个现有条目
+2026-09-25 02:33:07,891 - INFO - 从 bt-ip.txt 读取了 1083 个现有条目
+2026-09-25 02:33:07,891 - INFO - 开始下载: https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
+2026-09-25 02:33:28,279 - ERROR - 下载超时: https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7
+2026-09-25 02:33:28,280 - INFO - 从 https://api.yaozuopan.top:88/composite?key=bt&auth=3cae9a3a53f1daef137126648a535ab7 提取了 0 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:28,280 - INFO - 开始下载: https://www.gbsat.org/bt/tracker.txt
+2026-09-25 02:33:28,711 - INFO - 下载成功: https://www.gbsat.org/bt/tracker.txt (状态码: 200, 类型: text/plain)
+2026-09-25 02:33:28,712 - INFO - 从 https://www.gbsat.org/bt/tracker.txt 提取了 216 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:28,713 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/all.txt
+2026-09-25 02:33:29,100 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:29,101 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/all.txt 提取了 119 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:29,103 - INFO - 开始下载: https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt
+2026-09-25 02:33:29,304 - INFO - 下载成功: https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:29,308 - INFO - 从 https://raw.githubusercontent.com/Tunglies/TrackersList/refs/heads/main/all.txt 提取了 1539 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:29,309 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt
+2026-09-25 02:33:29,928 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:29,928 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/all_aria2.txt 提取了 119 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:29,930 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/best.txt
+2026-09-25 02:33:30,241 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:30,242 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/best.txt 提取了 71 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:30,243 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt
+2026-09-25 02:33:30,843 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:30,843 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/best_aria2.txt 提取了 71 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:30,845 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt
+2026-09-25 02:33:31,298 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:31,298 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/blacklist.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:31,300 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/http.txt
+2026-09-25 02:33:31,697 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:31,698 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/http.txt 提取了 49 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:31,699 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt
+2026-09-25 02:33:32,334 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:32,334 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/http_aria2.txt 提取了 49 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:32,336 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt
+2026-09-25 02:33:32,748 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:32,749 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/nohttp.txt 提取了 69 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:32,750 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt
+2026-09-25 02:33:33,375 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:33,375 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/nohttp_aria2.txt 提取了 69 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:33,377 - INFO - 开始下载: https://github.com/XIU2/TrackersListCollection/raw/master/other.txt
+2026-09-25 02:33:34,016 - INFO - 下载成功: https://github.com/XIU2/TrackersListCollection/raw/master/other.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:34,016 - INFO - 从 https://github.com/XIU2/TrackersListCollection/raw/master/other.txt 提取了 13 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:34,018 - INFO - 开始下载: https://cf.trackerslist.com/all.txt
+2026-09-25 02:33:34,226 - INFO - 下载成功: https://cf.trackerslist.com/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:34,227 - INFO - 从 https://cf.trackerslist.com/all.txt 提取了 119 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:34,228 - INFO - 开始下载: https://cf.trackerslist.com/best.txt
+2026-09-25 02:33:34,655 - INFO - 下载成功: https://cf.trackerslist.com/best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:34,656 - INFO - 从 https://cf.trackerslist.com/best.txt 提取了 71 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:34,657 - INFO - 开始下载: https://cf.trackerslist.com/http.txt
+2026-09-25 02:33:36,409 - INFO - 下载成功: https://cf.trackerslist.com/http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:36,409 - INFO - 从 https://cf.trackerslist.com/http.txt 提取了 49 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:36,410 - INFO - 开始下载: https://cf.trackerslist.com/nohttp.txt
+2026-09-25 02:33:38,132 - INFO - 下载成功: https://cf.trackerslist.com/nohttp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:38,132 - INFO - 从 https://cf.trackerslist.com/nohttp.txt 提取了 69 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:38,136 - INFO - 开始下载: https://github.com/ngosang/trackerslist/raw/master/blacklist.txt
+2026-09-25 02:33:38,550 - INFO - 下载成功: https://github.com/ngosang/trackerslist/raw/master/blacklist.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:38,552 - INFO - 从 https://github.com/ngosang/trackerslist/raw/master/blacklist.txt 提取了 390 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:38,553 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt
+2026-09-25 02:33:38,647 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:38,647 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:38,647 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt
+2026-09-25 02:33:38,699 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:38,700 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all.txt 提取了 74 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:38,700 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt
+2026-09-25 02:33:38,987 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:38,988 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_udp.txt 提取了 47 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:38,988 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt
+2026-09-25 02:33:39,274 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:39,274 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_http.txt 提取了 16 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:39,275 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt
+2026-09-25 02:33:39,323 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:39,323 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_https.txt 提取了 11 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:39,323 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt
+2026-09-25 02:33:39,645 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:39,645 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ws.txt 提取了 3 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:39,646 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt
+2026-09-25 02:33:39,768 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:39,768 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best_ip.txt 提取了 20 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:39,769 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
+2026-09-25 02:33:39,824 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:39,824 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt 提取了 54 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:39,825 - INFO - 开始下载: https://newtrackon.com/api/all
+2026-09-25 02:33:40,149 - INFO - 下载成功: https://newtrackon.com/api/all (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:40,149 - WARNING - URL https://newtrackon.com/api/all 检测到 JSON 类型但解析失败，将尝试文本分割。
+2026-09-25 02:33:40,150 - INFO - 从 https://newtrackon.com/api/all 提取了 257 个唯一有效条目 (JSON尝试: True)
+2026-09-25 02:33:40,151 - INFO - 开始下载: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt
+2026-09-25 02:33:40,271 - ERROR - 下载失败: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt - 404 Client Error: Not Found for url: https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt
+2026-09-25 02:33:40,271 - INFO - 从 https://raw.githubusercontent.com/Anshuman8/open-trackers-list/master/trackers.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:40,272 - INFO - 开始下载: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt
+2026-09-25 02:33:40,535 - INFO - 下载成功: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:40,545 - INFO - 从 https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_all.txt 提取了 3531 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:40,546 - INFO - 开始下载: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt
+2026-09-25 02:33:40,696 - INFO - 下载成功: https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:40,697 - INFO - 从 https://raw.githubusercontent.com/adysec/tracker/refs/heads/main/trackers_best.txt 提取了 321 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:40,698 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt
+2026-09-25 02:33:41,150 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:41,152 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_exclude.txt 提取了 534 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:41,153 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt
+2026-09-25 02:33:41,342 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:41,345 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_combine.txt 提取了 856 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:41,346 - INFO - 开始下载: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt
+2026-09-25 02:33:41,710 - INFO - 下载成功: https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:41,712 - INFO - 从 https://raw.githubusercontent.com/hezhijie0327/Trackerslist/refs/heads/main/trackerslist_tracker.txt 提取了 484 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:41,713 - INFO - 开始下载: https://trackerslist.com/all.txt
+2026-09-25 02:33:41,824 - INFO - 下载成功: https://trackerslist.com/all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:41,825 - INFO - 从 https://trackerslist.com/all.txt 提取了 119 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:41,825 - INFO - 开始下载: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt
+2026-09-25 02:33:41,949 - INFO - 下载成功: https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:41,952 - INFO - 从 https://raw.githubusercontent.com/DeSireFire/animeTrackerList/master/AT_all.txt 提取了 1091 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:41,953 - INFO - 开始下载: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt
+2026-09-25 02:33:42,247 - INFO - 下载成功: https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:42,247 - INFO - 从 https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_all_ip.txt 提取了 54 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:42,248 - INFO - 开始下载: https://github.com/user-attachments/files/17001768/trackerlist.txt
+2026-09-25 02:33:42,988 - INFO - 下载成功: https://github.com/user-attachments/files/17001768/trackerlist.txt (状态码: 200, 类型: text/plain)
+2026-09-25 02:33:43,005 - INFO - 从 https://github.com/user-attachments/files/17001768/trackerlist.txt 提取了 1510 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:43,007 - INFO - 开始下载: https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt
+2026-09-25 02:33:43,683 - INFO - 下载成功: https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt (状态码: 200, 类型: text/plain)
+2026-09-25 02:33:43,689 - INFO - 从 https://github.com/user-attachments/files/17001767/merged_merged_merged_merged_trackers_all_http.txt 提取了 1011 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:43,691 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt
+2026-09-25 02:33:44,582 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/best.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
+2026-09-25 02:33:44,582 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/best.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:44,582 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt
+2026-09-25 02:33:44,812 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/all.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
+2026-09-25 02:33:44,812 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/all.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:44,812 - INFO - 开始下载: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt
+2026-09-25 02:33:45,186 - ERROR - 下载失败: https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt - HTTPSConnectionPool(host='jsd.cdn.zzko.cn', port=443): Max retries exceeded with url: /gh/XIU2/TrackersListCollection/http.txt (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)')))
+2026-09-25 02:33:45,186 - INFO - 从 https://jsd.cdn.zzko.cn/gh/XIU2/TrackersListCollection/http.txt 提取了 0 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:45,186 - INFO - 开始下载: https://trackers.run/s/wp_up_hp_hs_v4_v6.txt
+2026-09-25 02:33:45,883 - INFO - 下载成功: https://trackers.run/s/wp_up_hp_hs_v4_v6.txt (状态码: 200, 类型: text/plain; charset=utf-8)
+2026-09-25 02:33:45,884 - INFO - 从 https://trackers.run/s/wp_up_hp_hs_v4_v6.txt 提取了 49 个唯一有效条目 (JSON尝试: False)
+2026-09-25 02:33:45,886 - INFO - 总共收集到 13164 个原始条目，去重后 4198 个唯一原始条目
+2026-09-25 02:33:46,019 - WARNING - 清理后的主机名 'opentracker.r4sas.i2p' 不符合基本域名结构 (来自: http://opentracker.r4sas.i2p:80/a)
+2026-09-25 02:33:46,021 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.merded.xyz00'. 使用: 'tracker.merded.xyz' (来自: http://tracker.merded.xyz00/announce)
+2026-09-25 02:33:46,026 - WARNING - 清理后的主机名 'sigmatracker.i2p' 不符合基本域名结构 (来自: http://sigmatracker.i2p:80/a)
+2026-09-25 02:33:46,027 - WARNING - 清理后的主机名 'opentracker.simp.i2p' 不符合基本域名结构 (来自: http://opentracker.simp.i2p:80/a)
+2026-09-25 02:33:46,029 - WARNING - 清理后的主机名 'nyaaplus.i2p' 不符合基本域名结构 (来自: http://nyaaplus.i2p/announce)
+2026-09-25 02:33:46,030 - WARNING - 清理后的主机名 'btrackrqkjp6kgelov5a3uxisis77ofxqt5nvy5hvvtoybjpmq4q.b32.i2p' 不符合基本域名结构 (来自: http://btrackrqkjp6kgelov5a3uxisis77ofxqt5nvy5hvvtoybjpmq4q.b32.i2p/announce)
+2026-09-25 02:33:46,031 - INFO - 检测到并移除隐式端口 '80' from hostname 'torrentsmd.com80'. 使用: 'torrentsmd.com' (来自: http://torrentsmd.com80/announce)
+2026-09-25 02:33:46,032 - WARNING - 清理后的主机名 'qimlze77z7w32lx2ntnwkuqslrzlsqy7774v3urueuarafyqik5a.b32.i2p' 不符合基本域名结构 (来自: http://qimlze77z7w32lx2ntnwkuqslrzlsqy7774v3urueuarafyqik5a.b32.i2p:80/a)
+2026-09-25 02:33:46,033 - INFO - 检测到并移除隐式端口 '80' from hostname 'share.camoe.cn80'. 使用: 'share.camoe.cn' (来自: http://share.camoe.cn80/announce)
+2026-09-25 02:33:46,033 - INFO - 检测到并移除隐式端口 '70' from hostname 'tr.cili001.com70'. 使用: 'tr.cili001.com' (来自: http://tr.cili001.com70/announce)
+2026-09-25 02:33:46,033 - WARNING - 检测到嵌套协议，尝试提取内部 URL: 'udp://http://www.peckservers.com:9000/announce'
+2026-09-25 02:33:46,036 - WARNING - 清理后的主机名 '6wbrmd4wodeewdykfw362gmlbeo26njc5zmtuxdvtomehpozzjja.b32.i2p' 不符合基本域名结构 (来自: http://6wbrmd4wodeewdykfw362gmlbeo26njc5zmtuxdvtomehpozzjja.b32.i2p/announce)
+2026-09-25 02:33:46,038 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker3.ctix.cn80'. 使用: 'tracker3.ctix.cn' (来自: http://tracker3.ctix.cn80/announce)
+2026-09-25 02:33:46,044 - WARNING - 清理后的主机名 'opentracker.skank.i2p' 不符合基本域名结构 (来自: udp://opentracker.skank.i2p:6969/a)
+2026-09-25 02:33:46,044 - INFO - 检测到并移除隐式端口 '00' from hostname 'jsb.by00'. 使用: 'jsb.by' (来自: http://jsb.by00/announce)
+2026-09-25 02:33:46,046 - WARNING - 清理后的主机名 'tracker2.postman.i2p' 不符合基本域名结构 (来自: http://tracker2.postman.i2p/announce.php)
+2026-09-25 02:33:46,047 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.minglong.org80'. 使用: 'tracker.minglong.org' (来自: http://tracker.minglong.org80/announce)
+2026-09-25 02:33:46,050 - WARNING - 清理后的主机名 'freetracker.i2p' 不符合基本域名结构 (来自: udp://freetracker.i2p:1337/announce)
+2026-09-25 02:33:46,053 - WARNING - 清理后的主机名 'tracker.insulaocculta.i2p' 不符合基本域名结构 (来自: http://tracker.insulaocculta.i2p/a)
+2026-09-25 02:33:46,053 - WARNING - 清理后的主机名 'opentracker.simp.i2p' 不符合基本域名结构 (来自: udp://opentracker.simp.i2p:6969/a)
+2026-09-25 02:33:46,054 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.renfei.net80'. 使用: 'tracker.renfei.net' (来自: http://tracker.renfei.net80/announce)
+2026-09-25 02:33:46,057 - INFO - 检测到并移除隐式端口 '00' from hostname 'laxclax.ddns.net00'. 使用: 'laxclax.ddns.net' (来自: http://laxclax.ddns.net00/announce)
+2026-09-25 02:33:46,058 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker.ali213.net80'. 使用: 'tracker.ali213.net' (来自: http://tracker.ali213.net80/announce)
+2026-09-25 02:33:46,060 - WARNING - 清理后的主机名 'opentracker.fattydove.i2p' 不符合基本域名结构 (来自: http://opentracker.fattydove.i2p:80/a)
+2026-09-25 02:33:46,061 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.ali213.net00'. 使用: 'tracker.ali213.net' (来自: http://tracker.ali213.net00/announce)
+2026-09-25 02:33:46,062 - INFO - 检测到并移除隐式端口 '80' from hostname 'tracker1.itzmx.com80'. 使用: 'tracker1.itzmx.com' (来自: http://tracker1.itzmx.com80/announce)
+2026-09-25 02:33:46,064 - WARNING - 清理后的主机名 'tracker.nyaa2p.i2p' 不符合基本域名结构 (来自: http://tracker.nyaa2p.i2p:80/announce)
+2026-09-25 02:33:46,065 - WARNING - 清理后的主机名 '4olv65sj4ifeak26wqiifr3q2vjv5d44x733ncqhtd7cmjwoinpa.b32.i2p' 不符合基本域名结构 (来自: http://4olv65sj4ifeak26wqiifr3q2vjv5d44x733ncqhtd7cmjwoinpa.b32.i2p/announce)
+2026-09-25 02:33:46,066 - WARNING - 清理后的主机名 'opentracker.dg2.i2p' 不符合基本域名结构 (来自: http://opentracker.dg2.i2p:80/a)
+2026-09-25 02:33:46,066 - WARNING - 清理后的主机名 'freetracker.i2p' 不符合基本域名结构 (来自: http://freetracker.i2p:7331/announce)
+2026-09-25 02:33:46,069 - INFO - 检测到并移除隐式端口 '80' from hostname 'www.chouchou.club80'. 使用: 'www.chouchou.club' (来自: http://www.chouchou.club80/announce)
+2026-09-25 02:33:46,100 - INFO - 检测到并移除隐式端口 '80' from hostname 'bt2.54new.com80'. 使用: 'bt2.54new.com' (来自: http://bt2.54new.com80/announce)
+2026-09-25 02:33:46,101 - INFO - 检测到并移除隐式端口 '80' from hostname 'montreal.nyap2p.com80'. 使用: 'montreal.nyap2p.com' (来自: http://montreal.nyap2p.com80/announce)
+2026-09-25 02:33:46,105 - INFO - 检测到并移除隐式端口 '00' from hostname 'frp.v2fy.com00'. 使用: 'frp.v2fy.com' (来自: http://frp.v2fy.com00/announce)
+2026-09-25 02:33:46,107 - INFO - 检测到并移除隐式端口 '00' from hostname 'tracker.dmhy.org00'. 使用: 'tracker.dmhy.org' (来自: http://tracker.dmhy.org00/announce)
+2026-09-25 02:33:46,111 - INFO - 检测到并移除隐式端口 '80' from hostname 'www.loushao.net80'. 使用: 'www.loushao.net' (来自: http://www.loushao.net80/announce)
+2026-09-25 02:33:46,113 - WARNING - 清理后的主机名 'opentracker.eeptorrent.i2p' 不符合基本域名结构 (来自: http://opentracker.eeptorrent.i2p:80/a)
+2026-09-25 02:33:46,113 - INFO - 检测到并移除隐式端口 '80' from hostname 'bt.ali213.net80'. 使用: 'bt.ali213.net' (来自: http://bt.ali213.net80/announce)
+2026-09-25 02:33:46,115 - WARNING - 清理后的主机名 'nyaaplus.i2p' 不符合基本域名结构 (来自: http://nyaaplus.i2p:80/announce)
+2026-09-25 02:33:46,118 - WARNING - 清理后的主机名 'opentracker.skank.i2p' 不符合基本域名结构 (来自: http://opentracker.skank.i2p:80/a)
+2026-09-25 02:33:46,124 - WARNING - 清理后的主机名 'tracker.nyaa2p.i2p' 不符合基本域名结构 (来自: http://tracker.nyaa2p.i2p/announce)
+2026-09-25 02:33:46,126 - WARNING - 清理后的主机名 'yet-another-public-tracker.i2p' 不符合基本域名结构 (来自: http://yet-another-public-tracker.i2p/announce)
+2026-09-25 02:33:46,127 - INFO - 检测到并移除隐式端口 '00' from hostname 'bt.ali213.net00'. 使用: 'bt.ali213.net' (来自: http://bt.ali213.net00/announce)
+2026-09-25 02:33:46,128 - INFO - 处理完成 4198 个唯一原始条目
+2026-09-25 02:33:46,128 - INFO - 本次运行提取到 1368 个唯一域名和 1077 个唯一 IP 地址
+2026-09-25 02:33:46,128 - INFO - 发现 3 个新域名
+2026-09-25 02:33:46,128 - INFO - 发现 2 个新 IP 地址
+2026-09-25 02:33:46,129 - INFO - 向 bt-site.txt 增量添加了 3 个条目
+2026-09-25 02:33:46,129 - INFO - 向 bt-ip.txt 增量添加了 2 个条目
+2026-09-25 02:33:46,129 - INFO - 成功覆盖写入 bt-site.json (包含 1368 条目)
+2026-09-25 02:33:46,130 - INFO - 成功覆盖写入 bt-ip.json (包含 1085 条目)
+2026-09-25 02:33:46,130 - INFO - --- 运行总结 ---
+2026-09-25 02:33:46,130 - INFO - --- 运行总结 (2026-09-25 02:33:46) ---
+2026-09-25 02:33:46,130 - INFO - 总耗时: 0:00:38
+2026-09-25 02:33:46,130 - INFO - 处理的 URL 数量: 42
+2026-09-25 02:33:46,130 - INFO - 收集的原始条目数: 13164 (4198 unique)
+2026-09-25 02:33:46,131 - INFO - 提取的唯一域名数 (本次): 3 (总计: 1368)
+2026-09-25 02:33:46,131 - INFO -   新增域名: [tracker.willy.pro, kolanopentracker.airdns.org, kolankoalastree.newtrackon.co.nz]
+2026-09-25 02:33:46,131 - INFO - 提取的唯一 IP 地址数 (本次): 2 (总计: 1085)
+2026-09-25 02:33:46,131 - INFO -   新增 IP: [223.165.69.105, 177.188.141.75]
+2026-09-25 02:33:46,131 - INFO - -------------------------------------
+2026-09-25 02:33:46,131 - INFO - 脚本运行成功结束
