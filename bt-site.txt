@@ -1366,3 +1366,4 @@ tracker.torrents.observer
 kolankoalastree.newtrackon.co.nz
 kolanopentracker.airdns.org
 tracker.willy.pro
+bt-tracker.de
