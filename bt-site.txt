@@ -1369,3 +1369,7 @@ tracker.willy.pro
 bt-tracker.de
 banzaitracker.com
 tracker.okade.pro
+gargoyleperch.de
+opentracker2.lain.moscow
+tracker.evergarden.uk
+tracker.sela.st
