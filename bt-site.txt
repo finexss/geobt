@@ -1373,3 +1373,4 @@ gargoyleperch.de
 opentracker2.lain.moscow
 tracker.evergarden.uk
 tracker.sela.st
+tracker.transfur.org
